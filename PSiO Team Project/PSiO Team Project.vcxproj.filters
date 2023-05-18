@@ -23,39 +23,37 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="sfml-audio-2.dll">
-      <Filter>SFML</Filter>
-    </None>
-    <None Include="sfml-audio-d-2.dll">
-      <Filter>SFML</Filter>
-    </None>
-    <None Include="sfml-graphics-2.dll">
-      <Filter>SFML</Filter>
-    </None>
-    <None Include="sfml-graphics-d-2.dll">
-      <Filter>SFML</Filter>
-    </None>
-    <None Include="sfml-network-2.dll">
-      <Filter>SFML</Filter>
-    </None>
-    <None Include="sfml-network-d-2.dll">
-      <Filter>SFML</Filter>
-    </None>
-    <None Include="sfml-system-2.dll">
-      <Filter>SFML</Filter>
-    </None>
-    <None Include="sfml-system-d-2.dll">
-      <Filter>SFML</Filter>
-    </None>
-    <None Include="sfml-window-2.dll">
-      <Filter>SFML</Filter>
-    </None>
-    <None Include="sfml-window-d-2.dll">
-      <Filter>SFML</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <CopyFileToFolders Include="openal32.dll">
+      <Filter>SFML</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="sfml-audio-2.dll">
+      <Filter>SFML</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="sfml-audio-d-2.dll">
+      <Filter>SFML</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="sfml-graphics-2.dll">
+      <Filter>SFML</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="sfml-graphics-d-2.dll">
+      <Filter>SFML</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="sfml-network-2.dll">
+      <Filter>SFML</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="sfml-network-d-2.dll">
+      <Filter>SFML</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="sfml-system-2.dll">
+      <Filter>SFML</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="sfml-system-d-2.dll">
+      <Filter>SFML</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="sfml-window-2.dll">
+      <Filter>SFML</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="sfml-window-d-2.dll">
       <Filter>SFML</Filter>
     </CopyFileToFolders>
   </ItemGroup>
