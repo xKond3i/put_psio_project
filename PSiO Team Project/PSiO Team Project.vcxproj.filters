@@ -13,5 +13,50 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="SFML">
+      <UniqueIdentifier>{e5b65034-35f7-4ffd-8cd8-8f01724c1ab0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sfml-audio-2.dll">
+      <Filter>SFML</Filter>
+    </None>
+    <None Include="sfml-audio-d-2.dll">
+      <Filter>SFML</Filter>
+    </None>
+    <None Include="sfml-graphics-2.dll">
+      <Filter>SFML</Filter>
+    </None>
+    <None Include="sfml-graphics-d-2.dll">
+      <Filter>SFML</Filter>
+    </None>
+    <None Include="sfml-network-2.dll">
+      <Filter>SFML</Filter>
+    </None>
+    <None Include="sfml-network-d-2.dll">
+      <Filter>SFML</Filter>
+    </None>
+    <None Include="sfml-system-2.dll">
+      <Filter>SFML</Filter>
+    </None>
+    <None Include="sfml-system-d-2.dll">
+      <Filter>SFML</Filter>
+    </None>
+    <None Include="sfml-window-2.dll">
+      <Filter>SFML</Filter>
+    </None>
+    <None Include="sfml-window-d-2.dll">
+      <Filter>SFML</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="openal32.dll">
+      <Filter>SFML</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>
