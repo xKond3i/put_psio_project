@@ -33,6 +33,9 @@
     <ClCompile Include="Background.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Boat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="openal32.dll">
@@ -68,15 +71,15 @@
     <CopyFileToFolders Include="sfml-window-d-2.dll">
       <Filter>SFML</Filter>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="..\..\..\..\Downloads\fisherman.jpg">
-      <Filter>Resource Files</Filter>
-    </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Background.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Boat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

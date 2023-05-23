@@ -1,16 +1,18 @@
 #pragma once
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-class Character
+class Boat
 {
 private:
-	sf::Sprite fisherman;
-	sf::Texture fisherman_texture;
+	sf::Sprite boat;
+	sf::Texture boat_texture;
+
 public:
-	Character();
-	~Character();
+	Boat();
+	~Boat();
 	void draw(sf::RenderTarget& target);
 	void setup();
-	
+
 
 };
+

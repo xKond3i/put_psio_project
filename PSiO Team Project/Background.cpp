@@ -2,14 +2,14 @@
 
 Background::Background()
 {
-	setupBackground();
+	setup();
 }
 
 Background::~Background()
 {
 }
 
-void Background::setupBackground()
+void Background::setup()
 {
 	float rectangleSkyHeight = 100;
 	//Definiowanie t³a
@@ -24,7 +24,7 @@ void Background::setupBackground()
 	rectangleWater.setFillColor(sf::Color(75, 81, 223, 255));
 }
 
-void Background::renderBackground(sf::RenderTarget& target)
+void Background::render(sf::RenderTarget& target)
 {
 	target.draw(rectangleSky);
 	target.draw(rectangleWater);
