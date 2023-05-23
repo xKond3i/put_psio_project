@@ -3,6 +3,8 @@
 
 #include <windows.h>
 
+
+
 int main() {
 
     sf::RenderWindow window(sf::VideoMode(1280, 720), "PSiO Team Project"); // sf::VideoMode::getDesktopMode() could be used for fullscreen
