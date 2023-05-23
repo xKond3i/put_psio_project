@@ -149,6 +149,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Boat.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -191,6 +192,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Background.h" />
+    <ClInclude Include="Boat.h" />
     <ClInclude Include="Camera.h" />
   </ItemGroup>
   <ItemGroup>

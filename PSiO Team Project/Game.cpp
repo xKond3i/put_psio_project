@@ -11,6 +11,7 @@ Game::Game()
 
     background = new Background();
     character = new Character();
+    boat = new Boat();
 
     // additional configuration
     ShowWindow(window->getSystemHandle(), SW_MAXIMIZE); // maximize window
@@ -25,6 +26,7 @@ Game::~Game()
 
     delete background;
     delete character;
+    delete boat;
 }
 
 void Game::run()
@@ -47,8 +49,9 @@ void Game::draw()
     window->clear(sf::Color(3, 4, 94, 255)); // clear previous frame
     
     // draw things here...
-    background->renderBackground(*window);
-    character->drawCharacter(*window);
+    background->render(*window);
+    character->draw(*window);
+    boat->draw(*window);
     
 
     window->display(); // show current frame

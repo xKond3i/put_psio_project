@@ -9,6 +9,7 @@
 #include "Camera.h"
 #include "Background.h"
 #include "Character.h"
+#include "Boat.h"
 
 // OTHER
 #include <windows.h>
@@ -26,6 +27,7 @@ private:
 	Camera* camera;
 	Background* background;
 	Character* character;
+	Boat* boat;
 
 	void update();
 	void draw();

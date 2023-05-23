@@ -7,14 +7,14 @@ private:
 	sf::RectangleShape rectangleCity;
 	sf::RectangleShape rectangleWater;
 	sf::RectangleShape rectangleSky;
-	void setupBackground();
+	void setup();
 public:
 
 	Background();
 	~Background();
-	void animateBackground();
-	void renderBackground(sf::RenderTarget& target);
-	void updateView();
+	void animate();
+	void render(sf::RenderTarget& target);
+	void update();
 
 
 };
