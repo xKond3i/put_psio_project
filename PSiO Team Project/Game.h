@@ -1,11 +1,13 @@
 #pragma once
 
+
 // SFML
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
 // COMPONENTS
 #include "Camera.h"
+#include "Background.h"
 
 // OTHER
 #include <windows.h>
@@ -21,6 +23,7 @@ private:
 	sf::Event* event;
 
 	Camera* camera;
+	Background* background;
 
 	void update();
 	void draw();

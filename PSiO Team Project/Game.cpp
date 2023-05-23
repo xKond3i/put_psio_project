@@ -1,5 +1,6 @@
 #include "Game.h"
 
+
 Game::Game()
 {
     // initialize variables
@@ -7,6 +8,8 @@ Game::Game()
     event = new sf::Event();
 
     camera = new Camera();
+
+    background = new Background();
 
     // additional configuration
     ShowWindow(window->getSystemHandle(), SW_MAXIMIZE); // maximize window
@@ -18,6 +21,8 @@ Game::~Game()
     delete event;
 
     delete camera;
+
+    delete background;
 }
 
 void Game::run()
@@ -37,11 +42,13 @@ void Game::update()
 void Game::draw()
 {
     window->clear(sf::Color(3, 4, 94, 255)); // clear previous frame
-
+    
     // draw things here...
+    background->renderBackground(*window);
 
 
     window->display(); // show current frame
+    
 }
 
 void Game::handleEvents()
