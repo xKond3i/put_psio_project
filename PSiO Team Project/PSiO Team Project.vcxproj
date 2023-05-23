@@ -197,6 +197,9 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="Game.h" />
   </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="..\..\..\..\Downloads\fisherman.jpg" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
