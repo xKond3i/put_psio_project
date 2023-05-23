@@ -29,5 +29,4 @@ void Background::renderBackground(sf::RenderTarget& target)
 	target.draw(rectangleSky);
 	target.draw(rectangleWater);
 	target.draw(rectangleCity);
-	
 }

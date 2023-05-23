@@ -10,6 +10,7 @@ Game::Game()
     camera = new Camera();
 
     background = new Background();
+    character = new Character();
 
     // additional configuration
     ShowWindow(window->getSystemHandle(), SW_MAXIMIZE); // maximize window
@@ -23,6 +24,7 @@ Game::~Game()
     delete camera;
 
     delete background;
+    delete character;
 }
 
 void Game::run()
@@ -45,6 +47,8 @@ void Game::draw()
     
     // draw things here...
     background->renderBackground(*window);
+    character->drawCharacter(*window);
+    
 
 
     window->display(); // show current frame

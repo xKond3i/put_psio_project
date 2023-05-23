@@ -8,6 +8,7 @@
 // COMPONENTS
 #include "Camera.h"
 #include "Background.h"
+#include "Character.h"
 
 // OTHER
 #include <windows.h>
@@ -24,6 +25,7 @@ private:
 
 	Camera* camera;
 	Background* background;
+	Character* character;
 
 	void update();
 	void draw();
