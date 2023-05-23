@@ -1,4 +1,4 @@
-**Poznan University of Technology** \
+**Poznan University of Technology 🎓** \
 *Structural and Object-Oriented Programming* \
 Team Project with [@‌IgnacyChrobak](https://github.com/saladtopfive)
 
