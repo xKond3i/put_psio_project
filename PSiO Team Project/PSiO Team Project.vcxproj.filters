@@ -68,9 +68,6 @@
     <CopyFileToFolders Include="sfml-window-d-2.dll">
       <Filter>SFML</Filter>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="..\..\..\..\Downloads\fisherman.jpg">
-      <Filter>Resource Files</Filter>
-    </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
