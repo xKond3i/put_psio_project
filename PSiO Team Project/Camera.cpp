@@ -2,7 +2,7 @@
 
 Camera::Camera()
 {
-	viewGame  = new sf::View();
+	viewGame  = new sf::View(sf::FloatRect(0, 760, 1920, 1080));
 	viewHUD   = new sf::View();
 	viewMenu  = new sf::View();
 	viewPause = new sf::View();

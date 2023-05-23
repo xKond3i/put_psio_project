@@ -37,6 +37,7 @@ void Game::run()
 void Game::update()
 {
     camera->update();
+    window->setView(*camera->viewGame);
 }
 
 void Game::draw()
@@ -45,7 +46,6 @@ void Game::draw()
     
     // draw things here...
     background->renderBackground(*window);
-
 
     window->display(); // show current frame
     
