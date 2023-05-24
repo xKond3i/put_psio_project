@@ -6,11 +6,10 @@ class Character
 private:
 	sf::Sprite fisherman;
 	sf::Texture fisherman_texture;
+
 public:
 	Character();
 	~Character();
 	void draw(sf::RenderTarget& target);
 	void setup();
-	
-
 };

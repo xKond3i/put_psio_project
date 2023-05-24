@@ -1,20 +1,24 @@
 #pragma once
 
-
 // SFML
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
 // COMPONENTS
+#include "ResourceManager.h"
+
 #include "Camera.h"
+
 #include "Background.h"
 #include "Character.h"
-#include "Boat.h"
 
 // OTHER
-#include <windows.h>
+#include <windows.h> // for maximizing window
 
 #include <string>
+
+// --- DEBUG
+#include <iostream>
 
 class Game
 {
@@ -24,14 +28,18 @@ private:
 
 	sf::Event* event;
 
+	ResourceManager* resources;
+
 	Camera* camera;
+
 	Background* background;
-	Character* character;
-	Boat* boat;
+	//Character* character;
 
 	void update();
 	void draw();
 	void handleEvents();
+
+	void load();
 	
 public:
 	Game();

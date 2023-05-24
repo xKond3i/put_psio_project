@@ -20,3 +20,16 @@ void Camera::update()
 {
 
 }
+
+void Camera::move(float x, float y)
+{
+	viewGame->move(x, y);
+	sf::Vector2f center = viewGame->getCenter();
+	sf::Vector2f size = viewGame->getSize();
+
+	float left = center.x - size.x / 2;
+	float right = center.x + size.x / 2;
+
+	if (left < 0) viewGame->move(-left, 0);
+	else if (right > 3200) viewGame->move(3200 - right, 0);
+}

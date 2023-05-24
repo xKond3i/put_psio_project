@@ -1,21 +1,29 @@
 #pragma once
+
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+
+#include "ResourceManager.h"
+
 class Background
 {
 private:
-	sf::RectangleShape rectangleCity;
-	sf::RectangleShape rectangleWater;
-	sf::RectangleShape rectangleSky;
-	void setup();
+	// layers - as we won't use them anywhere else we don't need pointers
+	sf::Sprite sky;
+	sf::Sprite clouds;
+	sf::Sprite city;
+
+	sf::Sprite moon;
+
+	sf::Sprite water;
+
+	float animationSpeed = 1.0;
+
 public:
-
-	Background();
+	Background(ResourceManager& resources);
 	~Background();
-	void animate();
+
 	void render(sf::RenderTarget& target);
-	void update();
-
-
+	void update();  // parallax
+	void animate(); // sf::Time will be used here
 };
-
