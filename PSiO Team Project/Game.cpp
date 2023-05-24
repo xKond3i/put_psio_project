@@ -3,12 +3,12 @@
 Game::Game()
 {
     // initialize variables
-    window = new sf::RenderWindow(sf::VideoMode(1280, 720), title); // sf::VideoMode::getDesktopMode() could be used for fullscreen
+    window = new sf::RenderWindow(sf::VideoMode(1280, 720), title, sf::Style::Titlebar | sf::Style::Close); // sf::VideoMode::getDesktopMode() could be used for fullscreen
     event = new sf::Event();
 
     resources = new ResourceManager();
 
-    camera = new Camera();
+    camera = new Camera(sf::IntRect(0, 0, 3200, 4800));
 
     // components that need resource manager will be created in load method
     background = nullptr;
@@ -82,6 +82,12 @@ void Game::handleEvents()
                 camera->move(-5, 0);
             } else if (event->key.code == sf::Keyboard::D || event->key.code == sf::Keyboard::Right) {
                 camera->move(5, 0);
+            }
+            if (event->key.code == sf::Keyboard::W || event->key.code == sf::Keyboard::Up) {
+                camera->move(0, -5);
+            }
+            else if (event->key.code == sf::Keyboard::S || event->key.code == sf::Keyboard::Down) {
+                camera->move(0, 5);
             }
         }
     }

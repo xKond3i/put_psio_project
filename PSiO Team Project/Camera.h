@@ -8,7 +8,7 @@
 class Camera
 {
 private:
-	// ...
+	sf::IntRect bounds; // [left, top, right, bottom]
 
 public:
 	sf::View* viewGame;
@@ -16,7 +16,7 @@ public:
 	sf::View* viewMenu;
 	sf::View* viewPause;
 
-	Camera();
+	Camera(sf::IntRect bounds_);
 	~Camera();
 
 	void update();
