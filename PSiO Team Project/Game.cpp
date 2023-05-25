@@ -71,6 +71,7 @@ void Game::update(sf::Time time)
 
     if (!isPaused)
     {
+        menu->update(time, *window);
         camera->moveTo(character->getPosition());
     }
     camera->update(time);
@@ -78,7 +79,7 @@ void Game::update(sf::Time time)
     background->update(time, *window);
     background->animate(time);
 
-    character->update(time);
+    character->update(time * timeScale);
 }
 
 void Game::draw()
@@ -104,11 +105,12 @@ void Game::handleEvents()
             if (event->key.code == sf::Keyboard::Escape)
             {
                 isPaused = !isPaused;
+                timeScale = isPaused ? 0 : 1;
                 camera->moveTo(menu->getPosition());
             }
         }
 
-        character->handleEvents(*event);
+        if (!isPaused) character->handleEvents(*event);
     }
 }
 
@@ -126,6 +128,10 @@ void Game::load()
 
     // boats textures
     resources->loadTexture("resources/boats/raft.png");
+
+    // fishing rods textures
+    resources->loadTexture("resources/fishing_rods/rods/basic.png");
+    resources->loadTexture("resources/fishing_rods/baits/basic.png");
 
     // --- components that need resources
     background = new Background(*resources, mapBounds);

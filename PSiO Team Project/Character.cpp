@@ -13,9 +13,13 @@ void Character::move(int dir)
     if (dir < 0) {
         character.setScale(-scale, scale);
         speed = -std::abs(speed);
+
+        rod->setScale(-scale, scale);
     } else {
         character.setScale(scale, scale);
         speed = std::abs(speed);
+
+        rod->setScale(scale, scale);
     }
 }
 
@@ -41,6 +45,7 @@ void Character::mapBoundsCollision()
 Character::Character(ResourceManager& resources, sf::IntRect mapBounds_)
 {
 	boat = new Boat(resources);
+    rod = new Rod(resources);
 
 	sf::Texture* texture = resources.getTexture("resources/character/character.png");
 	character.setTexture(*texture);
@@ -66,6 +71,7 @@ void Character::render(sf::RenderTarget& target)
 {
 	boat->render(target);
 	target.draw(character);
+    rod->render(target);
 }
 
 void Character::update(sf::Time time)
@@ -83,6 +89,7 @@ void Character::update(sf::Time time)
     mapBoundsCollision();
 
     boat->setPosition(character.getPosition());
+    rod->setPosition(character.getPosition());
 }
 
 void Character::handleEvents(sf::Event& event)

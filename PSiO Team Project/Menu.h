@@ -10,6 +10,9 @@ public:
 	
 	Menu(ResourceManager& resources, sf::IntRect mapBounds_);
 	~Menu();
+
+	void update(sf::Time time, sf::RenderTarget& target);
+
 	sf::Vector2f getPosition();
 
 };
