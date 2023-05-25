@@ -26,10 +26,10 @@ void Camera::update(sf::Time time)
 	viewGame->setCenter(state);
 	pos = state;
 
-	std::cout << "[" << t << "] ";
-	std::cout << pos.x << " " << pos.y;
-	std::cout << " -> " << state.x << " " << state.y;
-	std::cout << " -> " << target.x << " " << target.y << "\n";
+	//std::cout << "[" << t << "] ";
+	//std::cout << pos.x << " " << pos.y;
+	//std::cout << " -> " << state.x << " " << state.y;
+	//std::cout << " -> " << target.x << " " << target.y << "\n";
 
 	sf::Vector2f center = viewGame->getCenter();
 	sf::Vector2f size = viewGame->getSize();

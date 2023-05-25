@@ -70,7 +70,7 @@ void Character::render(sf::RenderTarget& target)
 
 void Character::update(sf::Time time)
 {
-    float t = time.asMilliseconds();
+    float t = time.asMilliseconds() / 1000.0;
 
     if (moving) {
         acceleration = acceleration > 1 ? 1 : acceleration + t;

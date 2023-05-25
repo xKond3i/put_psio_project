@@ -30,6 +30,8 @@ private:
 
 	sf::Event* event;
 	sf::Clock clock;
+	sf::Time timeUpdate = sf::Time::Zero;
+	const sf::Time timePerFrame = sf::seconds(1.f / 60.f);
 
 	ResourceManager* resources;
 

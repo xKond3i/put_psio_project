@@ -48,8 +48,17 @@ void Game::run()
     while (window->isOpen()) {
         sf::Time time = clock.restart();
 
+        //std::cout << time.asSeconds() << "\n";
+
         handleEvents();
-        update(time);
+
+        timeUpdate += time;
+        while (timeUpdate > timePerFrame)
+        {
+            timeUpdate -= timePerFrame;
+            update(timePerFrame);
+        }
+
         draw();
     }
 }
