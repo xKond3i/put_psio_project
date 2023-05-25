@@ -8,6 +8,7 @@
 #include "ResourceManager.h"
 
 #include "Camera.h"
+#include "Menu.h"
 
 #include "Background.h"
 #include "Character.h"
@@ -37,7 +38,11 @@ private:
 	Background* background;
 	Character* character;
 
+	Menu* menu;
+
 	sf::IntRect mapBounds;
+
+	bool isPaused = false;
 
 	void update(sf::Time time);
 	void draw();

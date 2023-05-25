@@ -12,9 +12,13 @@ Game::Game()
 
     camera = new Camera(mapBounds);
 
+
+    
+
     // components that need resource manager will be created in load method
     background = nullptr;
     character = nullptr;
+    menu = nullptr;
 
     // additional configuration
     ShowWindow(window->getSystemHandle(), SW_MAXIMIZE); // maximize window
@@ -31,6 +35,8 @@ Game::~Game()
 
     delete background;
     delete character;
+
+    delete menu;
 }
 
 
@@ -54,7 +60,10 @@ void Game::update(sf::Time time)
 {
     window->setView(*camera->viewGame);
 
-    camera->moveTo(character->getPosition());
+    if (!isPaused)
+    {
+        camera->moveTo(character->getPosition());
+    }
     camera->update(time);
 
     background->update(time, *window);
@@ -84,7 +93,10 @@ void Game::handleEvents()
         // KeyPressed
         if (event->type == sf::Event::KeyPressed) {
             if (event->key.code == sf::Keyboard::Escape)
-                window->close();
+            {
+                isPaused = !isPaused;
+                camera->moveTo(menu->getPosition());
+            }
         }
 
         character->handleEvents(*event);
@@ -109,4 +121,5 @@ void Game::load()
     // --- components that need resources
     background = new Background(*resources, mapBounds);
     character = new Character(*resources, mapBounds);
+    menu = new Menu(*resources, mapBounds);
 }

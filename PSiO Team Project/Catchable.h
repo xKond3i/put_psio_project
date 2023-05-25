@@ -13,6 +13,7 @@ protected:
 
 
 public:
+	
 	Catchable();
 	~Catchable();
 
