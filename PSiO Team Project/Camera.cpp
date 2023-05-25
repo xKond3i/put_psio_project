@@ -7,7 +7,7 @@ Camera::Camera(sf::IntRect bounds_)
 	viewMenu  = new sf::View();
 	viewPause = new sf::View();
 
-	bounds = bounds_;
+	mapBounds = bounds_;
 }
 
 Camera::~Camera()
@@ -18,8 +18,19 @@ Camera::~Camera()
 	delete viewPause;
 }
 
-void Camera::update()
+void Camera::update(sf::Time time)
 {
+	float t = time.asMilliseconds() / 1000.0;
+
+	sf::Vector2f state = pos + (target - pos) * t * speed;
+	viewGame->setCenter(state);
+	pos = state;
+
+	std::cout << "[" << t << "] ";
+	std::cout << pos.x << " " << pos.y;
+	std::cout << " -> " << state.x << " " << state.y;
+	std::cout << " -> " << target.x << " " << target.y << "\n";
+
 	sf::Vector2f center = viewGame->getCenter();
 	sf::Vector2f size = viewGame->getSize();
 
@@ -28,13 +39,14 @@ void Camera::update()
 	float top = center.y - size.y / 2;
 	float bottom = center.y + size.y / 2;
 
-	if (left < bounds.left) viewGame->move(-left, 0);
-	else if (right > bounds.width) viewGame->move(bounds.width - right, 0);
-	if (top < bounds.top) viewGame->move(0, -top);
-	else if (bottom > bounds.height) viewGame->move(0, bounds.height - bottom);
+	if (left < mapBounds.left) viewGame->move(-left, 0);
+	else if (right > (mapBounds.left + mapBounds.width)) viewGame->move(mapBounds.width - right, 0);
+	if (top < mapBounds.top) viewGame->move(0, -top);
+	else if (bottom > (mapBounds.top + mapBounds.height)) viewGame->move(0, mapBounds.height - bottom);
 }
 
-void Camera::move(float x, float y)
+void Camera::moveTo(sf::Vector2f target_)
 {
-	viewGame->move(x, y);
+	target = target_;
+	// pos = viewGame->getCenter();
 }

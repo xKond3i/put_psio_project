@@ -17,13 +17,15 @@ private:
 
 	sf::Sprite water;
 
+	sf::IntRect mapBounds;
+
 	float animationSpeed = 1.0;
 
 public:
-	Background(ResourceManager& resources);
+	Background(ResourceManager& resources, sf::IntRect mapBounds_);
 	~Background();
 
 	void render(sf::RenderTarget& target);
-	void update();  // parallax
-	void animate(); // sf::Time will be used here
+	void update(sf::Time time, sf::RenderTarget& target); // parallax
+	void animate(sf::Time time); // sf::Time will be used here
 };

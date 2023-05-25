@@ -8,11 +8,13 @@ Game::Game()
 
     resources = new ResourceManager();
 
-    camera = new Camera(sf::IntRect(0, 0, 3200, 4800));
+    mapBounds = sf::IntRect(0, 0, 3200, 4800);
+
+    camera = new Camera(mapBounds);
 
     // components that need resource manager will be created in load method
     background = nullptr;
-    //character = new Character();
+    character = nullptr;
 
     // additional configuration
     ShowWindow(window->getSystemHandle(), SW_MAXIMIZE); // maximize window
@@ -28,7 +30,7 @@ Game::~Game()
     delete camera;
 
     delete background;
-    //delete character;
+    delete character;
 }
 
 
@@ -38,20 +40,27 @@ void Game::run()
     load();
 
     while (window->isOpen()) {
+        sf::Time time = clock.restart();
+
         handleEvents();
-        update();
+        update(time);
         draw();
     }
 }
 
 
 
-void Game::update()
+void Game::update(sf::Time time)
 {
-    camera->update();
     window->setView(*camera->viewGame);
 
-    background->animate();
+    camera->moveTo(character->getPosition());
+    camera->update(time);
+
+    background->update(time, *window);
+    background->animate(time);
+
+    character->update(time);
 }
 
 void Game::draw()
@@ -60,7 +69,7 @@ void Game::draw()
     
     // draw things here...
     background->render(*window);
-    //character->draw(*window);
+    character->render(*window);
 
     window->display(); // show current frame
 }
@@ -76,20 +85,9 @@ void Game::handleEvents()
         if (event->type == sf::Event::KeyPressed) {
             if (event->key.code == sf::Keyboard::Escape)
                 window->close();
-            
-            // TO BE REPLACED
-            if (event->key.code == sf::Keyboard::A || event->key.code == sf::Keyboard::Left) {
-                camera->move(-5, 0);
-            } else if (event->key.code == sf::Keyboard::D || event->key.code == sf::Keyboard::Right) {
-                camera->move(5, 0);
-            }
-            if (event->key.code == sf::Keyboard::W || event->key.code == sf::Keyboard::Up) {
-                camera->move(0, -5);
-            }
-            else if (event->key.code == sf::Keyboard::S || event->key.code == sf::Keyboard::Down) {
-                camera->move(0, 5);
-            }
         }
+
+        character->handleEvents(*event);
     }
 }
 
@@ -109,5 +107,6 @@ void Game::load()
     resources->loadTexture("resources/boats/raft.png");
 
     // --- components that need resources
-    background = new Background(*resources);
+    background = new Background(*resources, mapBounds);
+    character = new Character(*resources, mapBounds);
 }

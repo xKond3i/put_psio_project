@@ -27,15 +27,18 @@ private:
 	sf::RenderWindow* window;
 
 	sf::Event* event;
+	sf::Clock clock;
 
 	ResourceManager* resources;
 
 	Camera* camera;
 
 	Background* background;
-	//Character* character;
+	Character* character;
 
-	void update();
+	sf::IntRect mapBounds;
+
+	void update(sf::Time time);
 	void draw();
 	void handleEvents();
 

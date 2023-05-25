@@ -8,7 +8,11 @@
 class Camera
 {
 private:
-	sf::IntRect bounds; // [left, top, right, bottom]
+	sf::Vector2f pos;
+	sf::Vector2f target;
+	float speed = 0.5;
+	
+	sf::IntRect mapBounds;
 
 public:
 	sf::View* viewGame;
@@ -19,6 +23,7 @@ public:
 	Camera(sf::IntRect bounds_);
 	~Camera();
 
-	void update();
-	void move(float x, float y);
+	void update(sf::Time time);
+
+	void moveTo(sf::Vector2f target_);
 };
