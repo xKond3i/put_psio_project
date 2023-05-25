@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Boat.h"
-
+#include "Rod.h"
 #include "ResourceManager.h"
 
 class Character
@@ -13,6 +13,7 @@ private:
 	sf::Sprite character;
 	
 	Boat* boat;
+	Rod* rod;
 
 	sf::IntRect mapBounds;
 

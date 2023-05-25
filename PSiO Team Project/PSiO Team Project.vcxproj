@@ -159,6 +159,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="Rod.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="openal32.dll">
@@ -203,6 +204,7 @@
     <ClInclude Include="Fish.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="Rod.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
