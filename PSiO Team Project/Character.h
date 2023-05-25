@@ -19,7 +19,7 @@ private:
 	bool moving = false;
 
 	float acceleration = 0;
-	float speed = 1;
+	float speed = 0.5;
 
 	void move(int dir);
 	void mapBoundsCollision();

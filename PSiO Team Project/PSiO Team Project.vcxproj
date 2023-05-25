@@ -151,7 +151,9 @@
   <ItemGroup>
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Boat.cpp" />
+    <ClCompile Include="Catchable.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="Fish.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="main.cpp" />
@@ -196,6 +198,8 @@
     <ClInclude Include="Background.h" />
     <ClInclude Include="Boat.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Catchable.h" />
+    <ClInclude Include="Fish.h" />
     <ClInclude Include="ResourceManager.h" />
   </ItemGroup>
   <ItemGroup>

@@ -10,7 +10,7 @@ class Camera
 private:
 	sf::Vector2f pos;
 	sf::Vector2f target;
-	float speed = 0.5;
+	float speed = 1;
 	
 	sf::IntRect mapBounds;
 

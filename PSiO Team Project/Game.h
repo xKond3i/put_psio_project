@@ -11,6 +11,7 @@
 
 #include "Background.h"
 #include "Character.h"
+#include "Fish.h"
 
 // OTHER
 #include <windows.h> // for maximizing window

@@ -48,5 +48,5 @@ void Camera::update(sf::Time time)
 void Camera::moveTo(sf::Vector2f target_)
 {
 	target = target_;
-	// pos = viewGame->getCenter();
+	//pos = viewGame->getCenter(); wycentrowanie kamery
 }
