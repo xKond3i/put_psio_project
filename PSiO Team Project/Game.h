@@ -1,62 +1,99 @@
 #pragma once
 
-// SFML
+/* ---------- INCLUDES ---------- */
+// SFML libraries
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-// COMPONENTS
-#include "ResourceManager.h"
-
-#include "Camera.h"
-#include "Menu.h"
-
-#include "Background.h"
-#include "Character.h"
-#include "Fish.h"
-
-// OTHER
+// OTHER libraries
 #include <windows.h> // for maximizing window
 
 #include <string>
 
-// --- DEBUG
+// RESOURCES
+#include "ResourceManager.h"
+#include "SoundManager.h"
+
+// GAME contructs
+#include "Camera.h"
+
+// COMPONENTS
+#include "Background.h"
+#include "Player.h"
+
+
+
+// --- DEBUG libraries
 #include <iostream>
 
 class Game
 {
 private:
-	std::string title = "Tadziu's Fishing Adventure";
-	sf::RenderWindow* window;
+	/* ---------- VARIABLES ---------- */
+	// --- GLOBAL settings
+	const std::string  title = "Tadziu's Fishing Adventure";
+	const unsigned int fps = 90;
 
-	sf::Event* event;
-	sf::Clock clock;
-	float timeScale = 1;
-	sf::Time timeUpdate = sf::Time::Zero;
-	//const sf::Time timePerFrame = sf::seconds(1.f / 60.f);
-	sf::Time timePerFrame = sf::seconds(1.f / 60.f);
+	float timeScale = 1.f;
+	bool  paused = false;
+
+	//sf::VideoMode windowSize = { 1920, 1080 };
+	sf::VideoMode windowSize = { 1280, 720 };
+
+	sf::Image icon;
+
+
+
+	// --- GAME settings
+	sf::IntRect mapBounds = sf::IntRect(0, 0, 1024, 4096);
+	sf::Color fillColor = sf::Color(19, 31, 65);
+
+
+
+	// --- GAME constructs
+	sf::RenderWindow* window;
+	sf::Event event;
 
 	ResourceManager* resources;
+	SoundManager* soundManager;
 
 	Camera* camera;
 
+
+
+	// --- COMPONENTS
 	Background* background;
-	Character* character;
+	Player* player;
 
-	Menu* menu;
-
-	sf::IntRect mapBounds;
-
-	bool isPaused = false;
-
-	void update(sf::Time time);
-	void draw();
-	void handleEvents();
-
-	void load();
 	
+
+	// SPLASH SCREEN
+	sf::RectangleShape dimm;
+	sf::Sprite logo;
+	sf::Time splashTime = sf::Time::Zero;
+	sf::Time splashTimeEnd = sf::seconds(3);
+	bool splashFadingOut = true;
+	bool splashFirstTime = true;
+
+
+
+	/* ---------- METHODS ---------- */
+	void load();
+	void splashScreen(sf::Time time);
+
 public:
 	Game();
 	~Game();
 
+	/* ---------- METHODS ---------- */
 	void run();
+
+	
+
+	void handleEvents();
+
+	void update(sf::Time time);		 // logic EXCEPT physics take place here!
+	void fixedUpdate(sf::Time time); // physics take place here.
+
+	void draw();
 };

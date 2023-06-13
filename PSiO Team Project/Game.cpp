@@ -2,63 +2,77 @@
 
 Game::Game()
 {
-    // initialize variables
-    window = new sf::RenderWindow(sf::VideoMode(1280, 720), title, sf::Style::Titlebar | sf::Style::Close); // sf::VideoMode::getDesktopMode() could be used for fullscreen
-    event = new sf::Event();
-
-    resources = new ResourceManager();
-
-    mapBounds = sf::IntRect(0, 0, 3200, 4800);
-
-    camera = new Camera(mapBounds);
-
-
+    // --- INITIALIZE VARIABLES
+    // --- GAME constructs
+    window = new sf::RenderWindow(windowSize, title); // sf::VideoMode::getDesktopMode() could be used for fullscreen
+    //window = new sf::RenderWindow(windowSize, title, sf::Style::Titlebar | sf::Style::Close); // sf::VideoMode::getDesktopMode() could be used for fullscreen
+    event  = sf::Event();
     
+    resources    = new ResourceManager();
+    soundManager = new SoundManager();
+    camera       = new Camera(windowSize);
 
-    // components that need resource manager will be created in load method
+    // --- components that NEED resource manager will be created in load method
     background = nullptr;
-    character = nullptr;
-    menu = nullptr;
+    player     = nullptr;
 
-    // additional configuration
-    ShowWindow(window->getSystemHandle(), SW_MAXIMIZE); // maximize window
+    // --- ADDITIONAL CONFIGURATION
+    //ShowWindow(window->getSystemHandle(), SW_MAXIMIZE); // maximize window
+    icon.loadFromFile("resources/textures/icon.png");
+    window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+
+    // SPLASH SCREEN
+    dimm.setSize({ (float)windowSize.width, (float)windowSize.height });
+    dimm.setPosition({ 0, 0 });
+
+    logo.setPosition({ (float)windowSize.width / 2, (float)windowSize.height / 2 });
 }
 
 Game::~Game()
 {
-    delete window;
-    delete event;
-
-    delete resources;
-
-    delete camera;
-
+    // objects first
     delete background;
-    delete character;
+    delete player;
 
-    delete menu;
+
+
+    // more important constructs last
+    delete camera;
+    delete soundManager;
+    delete resources;
+    delete window;
 }
 
 
 
 void Game::run()
 {
-    load();
+    // --- TIME
+    sf::Clock clock;
+    sf::Time timeSinceLastUpdate = sf::Time::Zero;
+    const sf::Time timePerFrame  = sf::seconds(1.f / fps);
+
+    load(); // load resources
 
     while (window->isOpen()) {
         sf::Time time = clock.restart();
+        timeSinceLastUpdate += time;
 
-        //std::cout << time.asSeconds() << "\n";
-
+        // EVENTS
         handleEvents();
+        
+        // UPDATE
+        update(time);
 
-        timeUpdate += time;
-        while (timeUpdate > timePerFrame)
+        // FIXED UPDATE
+        while (timeSinceLastUpdate > timePerFrame)
         {
-            timeUpdate -= timePerFrame;
-            update(timePerFrame);
+            handleEvents();                      // EVENTS per FIXED frame
+            fixedUpdate(timePerFrame);           // FIXED UPDATE
+            timeSinceLastUpdate -= timePerFrame;
         }
 
+        // DRAW
         draw();
     }
 }
@@ -67,74 +81,161 @@ void Game::run()
 
 void Game::update(sf::Time time)
 {
-    window->setView(*camera->viewGame);
+    time = time * timeScale;
 
-    if (!isPaused)
-    {
-        menu->update(time, *window);
-        camera->moveTo(character->getPosition());
-    }
-    camera->update(time);
-
-    background->update(time, *window);
-    background->animate(time);
-
-    character->update(time * timeScale);
+    // ...
 }
+
+void Game::fixedUpdate(sf::Time time)
+{
+    sf::Time timeScaled = time * timeScale;
+
+    background->fixedUpdate(time);
+    background->moveMoon(camera->getView(Camera::GAME));
+
+    player->fixedUpdate(timeScaled);
+
+    sf::Vector2f pos = player->getPosition();
+    pos.y -= 100;
+    if (!paused) camera->moveTo(pos);
+
+    camera->fixedUpdate(time);
+    camera->fixToBounds(mapBounds);
+
+    // ...
+
+    splashScreen(time);
+}
+
+
 
 void Game::draw()
 {
-    window->clear(sf::Color::Black); // clear previous frame // sf::Color(3, 4, 94, 255)
-    
+    window->clear(fillColor); // clear previous frame // sf::Color(3, 4, 94, 255)
+
+    // --- Game View
+    window->setView(*camera->getView(Camera::GAME));
+
     // draw things here...
-    background->render(*window);
-    character->render(*window);
+    background->draw(*window);
+    window->draw(*player);
+
+    // --- UI View
+    window->setView(*camera->getView(Camera::UI));
+
+    // SPLASH SCREEN
+    window->draw(dimm);
+    window->draw(logo);
 
     window->display(); // show current frame
 }
 
+
+
 void Game::handleEvents()
 {
-    while (window->pollEvent(*event)) {
+    while (window->pollEvent(event)) {
         // Close Button
-        if (event->type == sf::Event::Closed)
+        if (event.type == sf::Event::Closed)
             window->close();
 
         // KeyPressed
-        if (event->type == sf::Event::KeyPressed) {
-            if (event->key.code == sf::Keyboard::Escape)
+        if (event.type == sf::Event::KeyPressed) {
+            if (event.key.code == sf::Keyboard::Escape)
             {
-                isPaused = !isPaused;
-                timeScale = isPaused ? 0 : 1;
-                camera->moveTo(menu->getPosition());
+                paused = !paused;
+                timeScale = paused ? 0.f : 1.f;
+
+                camera->moveTo({ player->getPosition().x, 0 });
+                splashTime = sf::Time::Zero;
+
+                splashFadingOut = !paused;
             }
         }
 
-        if (!isPaused) character->handleEvents(*event);
+        // Window Resized
+        if (event.type == sf::Event::Resized)
+        {
+            windowSize = { event.size.width, event.size.height };
+            
+            // SPLASH SCREEN
+            dimm.setSize({ (float)windowSize.width, (float)windowSize.height });
+            logo.setPosition({ (float)windowSize.width / 2, (float)windowSize.height / 2 });
+        }
+
+        //if (event.type == sf::Event::MouseMoved) {
+        //    window->setView(*camera->getView(Camera::GAME));
+        //    sf::Vector2f coords = window->mapPixelToCoords({ event.mouseMove.x, event.mouseMove.y });
+        //    std::cout << "[" << coords.x << ", " << coords.y << "]\n";
+        //}
+
+        camera -> handleEvents(event);
     }
 }
 
+
+
 void Game::load()
 {
-    // background textures
-    resources->loadTexture("resources/background/sky.png");
-    resources->loadTexture("resources/background/clouds.png");
-    resources->loadTexture("resources/background/city.png");
-    resources->loadTexture("resources/background/moon.png");
-    resources->loadTexture("resources/background/water.png");
+    /* ---------- TEXTURES ---------- */
+    try {
+        // splash screen
+        resources->loadTexture("logo", "resources/textures/UI/logo.png", false);
 
-    // character textures
-    resources->loadTexture("resources/character/character.png");
+        // background textures
+        resources->loadTexture("bg/sky",      "resources/textures/background/sky.png",         true);
+        resources->loadTexture("bg/clouds",   "resources/textures/background/clouds.png",      true);
+        resources->loadTexture("bg/city_far", "resources/textures/background/city_far.png",    true);
+        resources->loadTexture("bg/city",     "resources/textures/background/city.png",        true);
+        resources->loadTexture("bg/nature",   "resources/textures/background/nature.png",      true);
+        resources->loadTexture("bg/lilies",   "resources/textures/background/lilies.png",      true);
+        resources->loadTexture("bg/water",    "resources/textures/background/water.png",       true);
+        resources->loadTexture("bg/waves",    "resources/textures/background/water_waves.png", true);
 
-    // boats textures
-    resources->loadTexture("resources/boats/raft.png");
+        resources->loadTexture("bg/moon", "resources/textures/background/moon.png", true);
+        resources->loadTexture("bg/map_border", "resources/textures/background/map_border.png", true);
 
-    // fishing rods textures
-    resources->loadTexture("resources/fishing_rods/rods/basic.png");
-    resources->loadTexture("resources/fishing_rods/baits/basic.png");
+        // player
+        resources->loadTexture("player", "resources/textures/player/player.png", false);
+    }
+    catch (std::exception e) {
+        std::cout << e.what() << "\n";
+    }
+
+    /* ---------- SOUNDS ---------- */
+    try {
+        // background
+        // ...
+    }
+    catch (std::exception e) {
+        std::cout << e.what() << "\n";
+    }
 
     // --- components that need resources
-    background = new Background(*resources, mapBounds);
-    character = new Character(*resources, mapBounds);
-    menu = new Menu(*resources, mapBounds);
+    background = new Background(resources, mapBounds);
+    player = new Player(resources);
+
+    // SPLASH SCREEN
+    logo.setTexture(*resources->getTexture("logo"));
+    auto bounds = logo.getLocalBounds();
+    logo.setOrigin(bounds.width / 2, bounds.height / 2);
+}
+
+
+
+void Game::splashScreen(sf::Time time)
+{
+    if (splashTime > splashTimeEnd) {
+        if (splashFirstTime) splashFirstTime = false;
+        return;
+    }
+    
+    splashTime += time;
+
+    float progress = splashTime / splashTimeEnd;
+    if (splashFadingOut) progress = 1.f - progress;
+    
+    sf::Uint8 alpha = (int)(255 * progress);
+    dimm.setFillColor({ 0, 0, 0, (splashFirstTime ? alpha : sf::Uint8(alpha / 2)) });
+    logo.setColor({ 255, 255, 255, alpha });
 }
