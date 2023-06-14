@@ -114,9 +114,8 @@ void Player::fixedUpdate(sf::Time time)
 
 void Player::draw(sf::RenderTarget& target)
 {
-    FR->draw(target);
     target.draw(*this);
-    
+    FR->draw(target);
 }
 
 

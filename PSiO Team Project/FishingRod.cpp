@@ -15,7 +15,8 @@ FishingRod::~FishingRod()
 
 }
 
-void FishingRod::fixedUpdate(sf::Time time){
+void FishingRod::fixedUpdate(sf::Time time)
+{
 	float t = time.asSeconds();
 	std::cout << verticalDir << std::endl;
 	if (verticalDir == 1 && baitInAction) {
@@ -39,10 +40,10 @@ void FishingRod::fixedUpdate(sf::Time time){
 void FishingRod::setLineOrigin(sf::Vector2f baitOrigin, sf::Vector2f tadziuScale)
 {
 	if (tadziuScale.x < 0) {
-		baitOrigin.x -= 30;
+		baitOrigin.x -= 29;
 	}
 	else{
-		baitOrigin.x += 30;
+		baitOrigin.x += 29;
 	}
 	baitOrigin.y -= 36;
 	fishingRodPosition = baitOrigin;
