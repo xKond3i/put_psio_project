@@ -54,6 +54,7 @@ private:
 	bool zigZagDir = false;
 
 	// MAP BORDERS
+	float offset = 32.f;
 	bool borderSymbolAnimDir = false;
 	AnimatedSprite* borderSymbolLeft;
 	AnimatedSprite* borderSymbolRight;
@@ -64,6 +65,10 @@ public:
 
 	/* ---------- METHODS ---------- */
 	void moveMoon(sf::View* view);
+
+	float getOffset();
+
+
 
 	void update(sf::Time time);		 // logic EXCEPT physics take place here!
 	void fixedUpdate(sf::Time time); // physics take place here.

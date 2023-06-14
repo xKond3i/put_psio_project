@@ -37,6 +37,10 @@ private:
 	float timeScale = 1.f;
 	bool  paused = false;
 
+	bool cooldownFlag = false;
+	sf::Time cooldown = sf::Time::Zero;
+	sf::Time cooldownDuration = sf::seconds(2);
+
 	//sf::VideoMode windowSize = { 1920, 1080 };
 	sf::VideoMode windowSize = { 1280, 720 };
 
@@ -71,7 +75,7 @@ private:
 	sf::RectangleShape dimm;
 	sf::Sprite logo;
 	sf::Time splashTime = sf::Time::Zero;
-	sf::Time splashTimeEnd = sf::seconds(3);
+	sf::Time splashTimeEnd = sf::seconds(2);
 	bool splashFadingOut = true;
 	bool splashFirstTime = true;
 
@@ -79,6 +83,8 @@ private:
 
 	/* ---------- METHODS ---------- */
 	void load();
+	void pause();
+	void unpause();
 	void splashScreen(sf::Time time);
 
 public:

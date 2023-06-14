@@ -35,6 +35,13 @@ void Camera::handleEvents(sf::Event event)
 	if (event.type == sf::Event::Resized)
 	{
 		windowSize = { event.size.width, event.size.height };
+
+		// adjust scale
+		if		(windowSize.width > 1600) scale = 4;
+		else if (windowSize.width > 1200) scale = 3;
+		else if (windowSize.width > 900)  scale = 2.5;
+		else	scale = 2; // default -> the smallest
+
 		setupViews();
 	}
 }

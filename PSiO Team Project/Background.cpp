@@ -70,16 +70,15 @@ Background::Background(ResourceManager* resources, sf::IntRect mapBounds_)
     moon.setOrigin({ moon.getLocalBounds().width, 0 });
 
     // MAP BORDERS
-    float offset = 32;
     sf::Vector2u textureSize = resources->getTexture("bg/map_border")->getSize();
     std::vector<sf::IntRect> frames = { {0, 0, 32, 32}, {32, 0, 32, 32} };
 
     borderSymbolLeft = new AnimatedSprite(resources->getTexture("bg/map_border"), frames, 2);
-    borderSymbolLeft -> setPosition({ offset * 2, baseLine + offset });
+    borderSymbolLeft -> setPosition({ offset + textureSize.x / 2, baseLine + offset });
     borderSymbolLeft -> setOrigin(textureSize.x / 2, textureSize.y / 2);
 
     borderSymbolRight = new AnimatedSprite(resources->getTexture("bg/map_border"), frames, 2);
-    borderSymbolRight -> setPosition({ (float)mapBounds.width - offset * 2, baseLine + offset });
+    borderSymbolRight -> setPosition({ (float)mapBounds.width - textureSize.x / 2, baseLine + offset });
     borderSymbolRight -> setOrigin(textureSize.x / 2, textureSize.y / 2);
 }
 
@@ -114,8 +113,8 @@ void Background::fixedUpdate(sf::Time time)
             float currentStep = layer->getPosition().x;
             float textureSize = layer->getTexture()->getSize().x;
 
-            layer->move(parallaxIndex * parallaxModifier * parallaxSpeed * t * (zigZagDir ? step : -step),
-                        parallaxIndex * parallaxModifier * parallaxSpeed * t * (zigZagDir ? step : -step));
+            float d = parallaxIndex * parallaxModifier * parallaxSpeed * t * (zigZagDir ? step : -step);
+            layer->move({ d, d });
 
             if (currentStep < -textureSize-maxStep) zigZagDir = true;
             else if (currentStep > -textureSize+maxStep) zigZagDir = false;
@@ -158,6 +157,11 @@ void Background::draw(sf::RenderWindow& target)
 
     target.draw(*borderSymbolLeft);
     target.draw(*borderSymbolRight);
+}
+
+float Background::getOffset()
+{
+    return offset;
 }
 
 void Background::moveMoon(sf::View* view)

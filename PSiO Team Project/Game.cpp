@@ -18,8 +18,13 @@ Game::Game()
 
     // --- ADDITIONAL CONFIGURATION
     //ShowWindow(window->getSystemHandle(), SW_MAXIMIZE); // maximize window
+    //HWND consoleWindow = GetConsoleWindow();
+    //ShowWindow(consoleWindow, SW_HIDE);
+
     icon.loadFromFile("resources/textures/icon.png");
     window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+
+
 
     // SPLASH SCREEN
     dimm.setSize({ (float)windowSize.width, (float)windowSize.height });
@@ -81,9 +86,20 @@ void Game::run()
 
 void Game::update(sf::Time time)
 {
-    time = time * timeScale;
+    sf::Time timeScaled = time * timeScale;
 
-    // ...
+    cooldown -= time;
+
+    //if (cooldown < sf::Time::Zero) {
+    //    cooldown = sf::Time::Zero;
+    //    
+    //    if (paused) {
+    //        paused = false;
+    //        timeScale = 1.f;
+    //    }
+
+    //    std::cout << "COOLDOWN\n";
+    //}
 }
 
 void Game::fixedUpdate(sf::Time time)
@@ -94,6 +110,10 @@ void Game::fixedUpdate(sf::Time time)
     background->moveMoon(camera->getView(Camera::GAME));
 
     player->fixedUpdate(timeScaled);
+    sf::IntRect boundsWithOffset = mapBounds;
+    boundsWithOffset.left += background->getOffset() * 3;
+    boundsWithOffset.width -= background->getOffset() * 6;
+    player->checkFrameCollision(boundsWithOffset);
 
     sf::Vector2f pos = player->getPosition();
     pos.y -= 100;
@@ -113,12 +133,15 @@ void Game::draw()
 {
     window->clear(fillColor); // clear previous frame // sf::Color(3, 4, 94, 255)
 
+
+
     // --- Game View
     window->setView(*camera->getView(Camera::GAME));
 
-    // draw things here...
     background->draw(*window);
-    window->draw(*player);
+    player->draw(*window);
+
+
 
     // --- UI View
     window->setView(*camera->getView(Camera::UI));
@@ -126,6 +149,8 @@ void Game::draw()
     // SPLASH SCREEN
     window->draw(dimm);
     window->draw(logo);
+
+
 
     window->display(); // show current frame
 }
@@ -143,13 +168,15 @@ void Game::handleEvents()
         if (event.type == sf::Event::KeyPressed) {
             if (event.key.code == sf::Keyboard::Escape)
             {
-                paused = !paused;
-                timeScale = paused ? 0.f : 1.f;
+                pause();
+                //if (cooldown == sf::Time::Zero) {
+                //    if (!paused) pause();
+                //    else unpause();
 
-                camera->moveTo({ player->getPosition().x, 0 });
-                splashTime = sf::Time::Zero;
+                //    cooldown = cooldownDuration;
+                //}
 
-                splashFadingOut = !paused;
+                // [TODO] - instant pause on pause, and unpause after animation cooldown
             }
         }
 
@@ -170,6 +197,8 @@ void Game::handleEvents()
         //}
 
         camera -> handleEvents(event);
+
+        if (!paused) player -> handleEvents(event);
     }
 }
 
@@ -221,6 +250,36 @@ void Game::load()
     logo.setOrigin(bounds.width / 2, bounds.height / 2);
 }
 
+void Game::pause()
+{
+    paused = !paused;
+    timeScale = paused ? 0.f : 1.f;
+
+    camera->moveTo({ player->getPosition().x, 0 });
+    splashTime = sf::Time::Zero;
+
+    splashFadingOut = !paused;
+    /*paused = true;
+    timeScale = 0.f;
+
+    camera->moveTo({ player->getPosition().x, 0 });
+    splashTime = sf::Time::Zero;
+
+    splashFadingOut = false;*/
+
+    std::cout << "PAUSE\n";
+}
+
+void Game::unpause()
+{
+    std::cout << "UNPAUSE\n";
+
+    camera->moveTo(player->getPosition());
+    splashTime = sf::Time::Zero;
+
+    splashFadingOut = true;
+}
+
 
 
 void Game::splashScreen(sf::Time time)
@@ -233,6 +292,7 @@ void Game::splashScreen(sf::Time time)
     splashTime += time;
 
     float progress = splashTime / splashTimeEnd;
+    progress = progress > 1.f ? 1.f : progress < 0.f ? 0.f : progress;
     if (splashFadingOut) progress = 1.f - progress;
     
     sf::Uint8 alpha = (int)(255 * progress);
