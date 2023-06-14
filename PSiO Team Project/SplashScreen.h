@@ -8,7 +8,7 @@
 class SplashScreen
 {
 
-private:	
+private:
 
 	sf::RectangleShape dimm;
 	sf::Sprite logo;
@@ -24,4 +24,3 @@ public:
 	void play(sf::Time time);
 
 };
-
