@@ -8,6 +8,12 @@
 // RESOURCES
 #include "ResourceManager.h"
 
+// COMPONENTS
+#include "UI/Button.h"
+
+// OTHER
+#include <vector>
+
 class SplashScreen
 {
 private:	
@@ -19,11 +25,20 @@ private:
 	bool splashFadingOut = true;
 	bool splashFirstTime = true;
 
+	float windowHeight;
+	float centerY;
+	float spacing = 16;
+
+	std::vector<Button*> buttons;
+	float buttonsSpacing = 64;
+
 public:
 	SplashScreen(ResourceManager* resources, sf::RenderWindow& window);
 	~SplashScreen();
 
 	void draw(sf::RenderTarget& target);
+
+	void handleEvents(sf::Event event, sf::RenderTarget& window, bool paused);
 
 	void play(sf::Time time);
 	void restart();
@@ -31,5 +46,6 @@ public:
 
 	void resize(sf::VideoMode windowSize);
 
-};
+	bool entryFinished();
 
+};

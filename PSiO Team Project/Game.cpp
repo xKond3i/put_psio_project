@@ -151,7 +151,7 @@ void Game::handleEvents()
         if (event.type == sf::Event::KeyPressed) {
             if (event.key.code == sf::Keyboard::Escape)
             {
-                pause();
+                if (splashScreen->entryFinished()) pause();
             }
         }
 
@@ -159,20 +159,13 @@ void Game::handleEvents()
         if (event.type == sf::Event::Resized)
         {
             windowSize = { event.size.width, event.size.height };
-
-            // SPLASH SCREEN
-            splashScreen->resize(windowSize);
         }
-
-        //if (event.type == sf::Event::MouseMoved) {
-        //    window->setView(*camera->getView(Camera::GAME));
-        //    sf::Vector2f coords = window->mapPixelToCoords({ event.mouseMove.x, event.mouseMove.y });
-        //    std::cout << "[" << coords.x << ", " << coords.y << "]\n";
-        //}
 
         camera->handleEvents(event);
 
         player->handleEvents(event);
+
+        splashScreen->handleEvents(event, *window, paused);
     }
 }
 
@@ -216,8 +209,14 @@ void Game::load()
 
         // bait
         resources->loadTexture("bait1", "resources/textures/baits/1.png", false);
+        resources->loadTexture("bait2", "resources/textures/baits/2.png", false);
+        resources->loadTexture("bait3", "resources/textures/baits/3.png", false);
 
-        
+        // UI
+        resources->loadTexture("btn_play", "resources/textures/UI/play.png", false);
+        resources->loadTexture("btn_exit", "resources/textures/UI/exit.png", false);
+        resources->loadTexture("btn_muted", "resources/textures/UI/muted.png", false);
+        resources->loadTexture("btn_unmuted", "resources/textures/UI/unmuted.png", false);
     }
     catch (std::exception e) {
         std::cout << e.what() << "\n";
