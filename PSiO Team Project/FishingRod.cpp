@@ -5,6 +5,7 @@ FishingRod::FishingRod(ResourceManager* resources, sf::Vector2f tadziuPos)
 {
 	bait.setTexture(*resources->getTexture("bait1"));
 	bait.setOrigin(bait.getLocalBounds().width / 2, 0);
+	tadziuPos.y -= 28;
 	bait.setPosition(tadziuPos);
 }
 
@@ -13,19 +14,20 @@ FishingRod::~FishingRod()
 
 }
 
-void FishingRod::fixedUpdate(sf::Time time){
+void FishingRod::fixedUpdate(sf::Time time)
+{
 	float t = time.asSeconds();
 
-	bait.move(0,gForce);
+	bait.move(0, gForce);
 }
 
 void FishingRod::setLineOrigin(sf::Vector2f baitOrigin, sf::Vector2f tadziuScale)
 {
 	if (tadziuScale.x < 0) {
-		baitOrigin.x -= 30;
+		baitOrigin.x -= 29;
 	}
 	else{
-		baitOrigin.x += 30;
+		baitOrigin.x += 29;
 	}
 	baitOrigin.y -= 36;
 	fishingRodPosition = baitOrigin;
