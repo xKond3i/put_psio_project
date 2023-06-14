@@ -24,13 +24,6 @@ Game::Game()
     icon.loadFromFile("resources/textures/icon.png");
     window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
-
-
-    // SPLASH SCREEN
-    dimm.setSize({ (float)windowSize.width, (float)windowSize.height });
-    dimm.setPosition({ 0, 0 });
-
-    logo.setPosition({ (float)windowSize.width / 2, (float)windowSize.height / 2 });
 }
 
 Game::~Game()
@@ -136,11 +129,6 @@ void Game::draw()
     // --- UI View
     window->setView(*camera->getView(Camera::UI));
 
-    // SPLASH SCREEN
-    window->draw(dimm);
-    window->draw(logo);
-
-
 
     window->display(); // show current frame
 }
@@ -168,8 +156,8 @@ void Game::handleEvents()
             windowSize = { event.size.width, event.size.height };
             
             // SPLASH SCREEN
-            dimm.setSize({ (float)windowSize.width, (float)windowSize.height });
-            logo.setPosition({ (float)windowSize.width / 2, (float)windowSize.height / 2 });
+           /* dimm.setSize({ (float)windowSize.width, (float)windowSize.height });
+            logo.setPosition({ (float)windowSize.width / 2, (float)windowSize.height / 2 });*/
         }
 
         //if (event.type == sf::Event::MouseMoved) {
@@ -208,6 +196,7 @@ void Game::load()
 
         // player
         resources->loadTexture("player", "resources/textures/player/player.png", false);
+
     }
     catch (std::exception e) {
         std::cout << e.what() << "\n";
@@ -227,10 +216,11 @@ void Game::load()
     player = new Player(resources);
 
     // SPLASH SCREEN
-    logo.setTexture(*resources->getTexture("logo"));
+ /*   logo.setTexture(*resources->getTexture("logo"));
     auto bounds = logo.getLocalBounds();
     logo.setOrigin(bounds.width / 2, bounds.height / 2);
-}
+    */
+    }
 
 void Game::pause()
 {
@@ -245,20 +235,3 @@ void Game::pause()
 
 
 
-void Game::splashScreen(sf::Time time)
-{
-    if (splashTime > splashTimeEnd) {
-        if (splashFirstTime) splashFirstTime = false;
-        return;
-    }
-    
-    splashTime += time;
-
-    float progress = splashTime / splashTimeEnd;
-    progress = progress > 1.f ? 1.f : progress < 0.f ? 0.f : progress;
-    if (splashFadingOut) progress = 1.f - progress;
-    
-    sf::Uint8 alpha = (int)(255 * progress);
-    dimm.setFillColor({ 0, 0, 0, (splashFirstTime ? alpha : sf::Uint8(alpha / 2)) });
-    logo.setColor({ 255, 255, 255, alpha });
-}

@@ -160,12 +160,14 @@
   <ItemGroup>
     <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="FishingRod.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="SplashScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="openal32.dll">
@@ -206,10 +208,12 @@
     <ClInclude Include="AnimatedSprite.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="FishingRod.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="SplashScreen.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />

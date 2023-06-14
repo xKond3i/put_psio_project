@@ -11,34 +11,24 @@
 // BASE
 #include "AnimatedSprite.h"
 
-// COMPONENTS
-#include "FishingRod.h"
-
 // OTHER
 #include <vector>
+#include <iostream>
 
-class Player : public AnimatedSprite
+
+class FishingRod
 {
+
 private:
-	sf::Vector2i frameSize = {64, 64};
-	unsigned int frameCount = 4;
-
-	// fishing rod
-	FishingRod* FR;
-
-	// moving
-	int dir = 0;
-	int slideDir = 0;
-	float speed = 0;
-	float maxSpeed = 25;
-	float acceleration = maxSpeed/100.f;
-
-	bool holdingLeft = false;
-	bool holdingRight = false;
-
+	float gForce = 9.81f;
+	sf::Sprite bait;
+	sf::Vector2f baitPosition;
+	sf::Vector2f fishingRodPosition;
+	sf::Vertex line[2];
 public:
-	Player(ResourceManager* resources);
-	~Player();
+
+	FishingRod(ResourceManager*);
+	~FishingRod();
 
 	/* ---------- METHODS ---------- */
 	void checkFrameCollision(sf::IntRect frame);
@@ -47,8 +37,9 @@ public:
 
 	void update(sf::Time time);		 // logic EXCEPT physics take place here!
 	void fixedUpdate(sf::Time time); // physics take place here.
+	void setLineOrigin();
 
 	void draw(sf::RenderTarget& target);
 
-
 };
+

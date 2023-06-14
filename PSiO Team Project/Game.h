@@ -13,6 +13,7 @@
 // RESOURCES
 #include "ResourceManager.h"
 #include "SoundManager.h"
+#include "SplashScreen.h"
 
 // GAME contructs
 #include "Camera.h"
@@ -49,7 +50,6 @@ private:
 	sf::Color fillColor = sf::Color(19, 31, 65);
 
 
-
 	// --- GAME constructs
 	sf::RenderWindow* window;
 	sf::Event event;
@@ -59,28 +59,14 @@ private:
 
 	Camera* camera;
 
-
-
 	// --- COMPONENTS
 	Background* background;
 	Player* player;
 
-	
-
-	// SPLASH SCREEN
-	sf::RectangleShape dimm;
-	sf::Sprite logo;
-	sf::Time splashTime = sf::Time::Zero;
-	sf::Time splashTimeEnd = sf::seconds(2);
-	bool splashFadingOut = true;
-	bool splashFirstTime = true;
-
-
-
 	/* ---------- METHODS ---------- */
 	void load();
 	void pause();
-	void splashScreen(sf::Time time);
+
 
 public:
 	Game();
