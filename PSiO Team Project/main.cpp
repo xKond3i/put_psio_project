@@ -7,7 +7,7 @@ int main() {
     std::cout << "Structural and Object-Oriented Programming\n";
     std::cout << "[June 2023]\n";
     std::cout << "Team Project\n";
-    std::cout << "@KonradCeglarski\n@IgnacyChrobak";
+    std::cout << "@KonradCeglarski\n@IgnacyChrobak\n";
 
     Game game;
     game.run();

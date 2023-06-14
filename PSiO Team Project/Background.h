@@ -22,6 +22,8 @@ class Layer : public sf::Sprite
 {
 private:
 	int moving;
+
+	bool zigZagDir = false;
 	
 public:
 	Layer(sf::Texture* texture, sf::IntRect size, sf::Vector2f pos, int moving_=Layer::MOVING_NEVER, bool originBottom=true);
@@ -29,10 +31,9 @@ public:
 
 	static int MOVING_ZIGZAG;
 	static int MOVING_ALWAYS;
-	static int MOVING_WITH_PLAYER;
 	static int MOVING_NEVER;
 
-	int isMoving();
+	void animate(sf::Time time, float parallaxIndex, float parallaxSpeed, float parallaxModifier);
 };
 
 
@@ -49,9 +50,10 @@ private:
 	sf::Sprite moon;
 
 	sf::IntRect mapBounds;
+
+	// PARALLAX
 	float parallaxSpeed = 5.f;
-	float parallaxModifier = .5f;
-	bool zigZagDir = false;
+	float parallaxModifier = 1.5f;
 
 	// MAP BORDERS
 	float offset = 32.f;

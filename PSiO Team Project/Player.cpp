@@ -17,7 +17,7 @@ Player::Player(ResourceManager* resources)
     setPosition(96 + bounds.width / 2, 400);
 
     //Fishing Rod
-    FR = new FishingRod(resources);
+    //FR = new FishingRod(resources);
 }
 
 Player::~Player()
@@ -93,13 +93,13 @@ void Player::fixedUpdate(sf::Time time)
     }
     
     // handle speed and acceleration
-    if (dir == 0) speed -= acceleration * t;
-    else speed += acceleration * t;
+    if (dir == 0) speed -= acceleration;
+    else speed += acceleration;
     speed = speed > maxSpeed ? maxSpeed : speed;
     
     // move
-    if (dir == 0) move({ speed * slideDir, 0 });
-    else move({ speed * dir, 0 });
+    if (dir == 0) move({ speed * slideDir * t, 0 });
+    else move({ speed * dir * t, 0 });
 }
 
 void Player::draw(sf::RenderTarget& target)

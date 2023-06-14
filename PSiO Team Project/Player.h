@@ -12,11 +12,10 @@
 #include "AnimatedSprite.h"
 
 // COMPONENTS
-#include "FishingRod.h"
+//#include "FishingRod.h"
 
 // OTHER
 #include <vector>
-#include <iostream>
 
 class Player : public AnimatedSprite
 {
@@ -25,14 +24,14 @@ private:
 	unsigned int frameCount = 4;
 
 	// fishing rod
-	FishingRod* FR;
+	//FishingRod* FR;
 
 	// moving
 	int dir = 0;
 	int slideDir = 0;
 	float speed = 0;
-	float maxSpeed = .25f;
-	float acceleration = .1f;
+	float maxSpeed = 25;
+	float acceleration = maxSpeed/100.f;
 
 	bool holdingLeft = false;
 	bool holdingRight = false;
@@ -50,6 +49,5 @@ public:
 	void fixedUpdate(sf::Time time); // physics take place here.
 
 	void draw(sf::RenderTarget& target);
-
 
 };
