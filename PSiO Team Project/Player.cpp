@@ -17,7 +17,7 @@ Player::Player(ResourceManager* resources)
     setPosition(96 + bounds.width / 2, 400);
 
     //Fishing Rod
-    //FR = new FishingRod(resources);
+    FR = new FishingRod(resources,getPosition());
 }
 
 Player::~Player()
@@ -82,6 +82,8 @@ void Player::fixedUpdate(sf::Time time)
 {
     AnimatedSprite::fixedUpdate(time);
 
+    FR->setLineOrigin(getPosition(),getScale());
+
     float t = time.asSeconds();
 
     if (dir != 0) setScale({ (float)dir, (float)abs(dir) });
@@ -104,5 +106,7 @@ void Player::fixedUpdate(sf::Time time)
 
 void Player::draw(sf::RenderTarget& target)
 {
+    FR->draw(target);
     target.draw(*this);
+    
 }

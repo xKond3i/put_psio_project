@@ -12,7 +12,7 @@
 #include "AnimatedSprite.h"
 
 // COMPONENTS
-//#include "FishingRod.h"
+#include "FishingRod.h"
 
 // OTHER
 #include <vector>
@@ -24,7 +24,7 @@ private:
 	unsigned int frameCount = 4;
 
 	// fishing rod
-	//FishingRod* FR;
+	FishingRod* FR;
 
 	// moving
 	int dir = 0;

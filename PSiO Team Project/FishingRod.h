@@ -22,12 +22,10 @@ class FishingRod
 private:
 	float gForce = 9.81f;
 	sf::Sprite bait;
-	sf::Vector2f baitPosition;
 	sf::Vector2f fishingRodPosition;
-	sf::Vertex line[2];
 public:
 
-	FishingRod(ResourceManager*);
+	FishingRod(ResourceManager*, sf::Vector2f tadziuPos);
 	~FishingRod();
 
 	/* ---------- METHODS ---------- */
@@ -37,7 +35,7 @@ public:
 
 	void update(sf::Time time);		 // logic EXCEPT physics take place here!
 	void fixedUpdate(sf::Time time); // physics take place here.
-	void setLineOrigin();
+	void setLineOrigin(sf::Vector2f baitOrigin, sf::Vector2f tadziuScale);
 
 	void draw(sf::RenderTarget& target);
 

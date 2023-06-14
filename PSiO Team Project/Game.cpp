@@ -213,6 +213,11 @@ void Game::load()
 
         // player
         resources->loadTexture("player", "resources/textures/player/player.png", false);
+
+        // bait
+        resources->loadTexture("bait1", "resources/textures/baits/1.png", false);
+
+        
     }
     catch (std::exception e) {
         std::cout << e.what() << "\n";
