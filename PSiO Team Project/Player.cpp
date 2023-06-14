@@ -17,7 +17,7 @@ Player::Player(ResourceManager* resources)
     setPosition(96 + bounds.width / 2, 400);
 
     //Fishing Rod
-    FR = new FishingRod(resources);
+    //FR = new FishingRod(resources);
 }
 
 Player::~Player()

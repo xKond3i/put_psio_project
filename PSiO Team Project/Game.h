@@ -59,6 +59,8 @@ private:
 
 	Camera* camera;
 
+	SplashScreen* splashScreen;
+
 	// --- COMPONENTS
 	Background* background;
 	Player* player;

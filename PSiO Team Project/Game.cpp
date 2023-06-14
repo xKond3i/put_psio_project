@@ -6,15 +6,15 @@ Game::Game()
     // --- GAME constructs
     window = new sf::RenderWindow(windowSize, title); // sf::VideoMode::getDesktopMode() could be used for fullscreen
     //window = new sf::RenderWindow(windowSize, title, sf::Style::Titlebar | sf::Style::Close); // sf::VideoMode::getDesktopMode() could be used for fullscreen
-    event  = sf::Event();
-    
-    resources    = new ResourceManager();
+    event = sf::Event();
+
+    resources = new ResourceManager();
     soundManager = new SoundManager();
-    camera       = new Camera(windowSize);
+    camera = new Camera(windowSize);
 
     // --- components that NEED resource manager will be created in load method
     background = nullptr;
-    player     = nullptr;
+    player = nullptr;
 
     // --- ADDITIONAL CONFIGURATION
     //ShowWindow(window->getSystemHandle(), SW_MAXIMIZE); // maximize window
@@ -23,7 +23,6 @@ Game::Game()
 
     icon.loadFromFile("resources/textures/icon.png");
     window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
-
 }
 
 Game::~Game()
@@ -31,6 +30,8 @@ Game::~Game()
     // objects first
     delete background;
     delete player;
+
+    delete splashScreen;
 
 
 
@@ -48,7 +49,7 @@ void Game::run()
     // --- TIME
     sf::Clock clock;
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
-    const sf::Time timePerFrame  = sf::seconds(1.f / fps);
+    const sf::Time timePerFrame = sf::seconds(1.f / fps);
 
     load(); // load resources
 
@@ -58,15 +59,16 @@ void Game::run()
 
         // EVENTS
         handleEvents();
-        
+
         // UPDATE
         update(time);
 
         // FIXED UPDATE
         while (timeSinceLastUpdate > timePerFrame)
         {
-            handleEvents();                      // EVENTS per FIXED frame
-            fixedUpdate(timePerFrame);           // FIXED UPDATE
+            handleEvents();            // EVENTS per FIXED frame
+            fixedUpdate(timePerFrame); // FIXED UPDATE
+
             timeSinceLastUpdate -= timePerFrame;
         }
 
@@ -92,7 +94,7 @@ void Game::fixedUpdate(sf::Time time)
     camera->fixedUpdate(time);
     camera->fixToBounds(mapBounds);
 
-    splashScreen(time);
+    splashScreen->play(time);
 
 
 
@@ -129,6 +131,9 @@ void Game::draw()
     // --- UI View
     window->setView(*camera->getView(Camera::UI));
 
+    splashScreen->draw(*window);
+
+
 
     window->display(); // show current frame
 }
@@ -154,10 +159,9 @@ void Game::handleEvents()
         if (event.type == sf::Event::Resized)
         {
             windowSize = { event.size.width, event.size.height };
-            
+
             // SPLASH SCREEN
-           /* dimm.setSize({ (float)windowSize.width, (float)windowSize.height });
-            logo.setPosition({ (float)windowSize.width / 2, (float)windowSize.height / 2 });*/
+            splashScreen->resize(windowSize);
         }
 
         //if (event.type == sf::Event::MouseMoved) {
@@ -166,10 +170,23 @@ void Game::handleEvents()
         //    std::cout << "[" << coords.x << ", " << coords.y << "]\n";
         //}
 
-        camera -> handleEvents(event);
+        camera->handleEvents(event);
 
-        if (!paused) player -> handleEvents(event);
+        player->handleEvents(event);
     }
+}
+
+
+
+void Game::pause()
+{
+    paused = !paused;
+    timeScale = paused ? 0.f : 1.f;
+
+    camera->moveTo({ player->getPosition().x, 0 });
+
+    splashScreen->restart();
+    splashScreen->setFading(!paused);
 }
 
 
@@ -182,21 +199,20 @@ void Game::load()
         resources->loadTexture("logo", "resources/textures/UI/logo.png", false);
 
         // background textures
-        resources->loadTexture("bg/sky",      "resources/textures/background/sky.png",         true);
-        resources->loadTexture("bg/clouds",   "resources/textures/background/clouds.png",      true);
-        resources->loadTexture("bg/city_far", "resources/textures/background/city_far.png",    true);
-        resources->loadTexture("bg/city",     "resources/textures/background/city.png",        true);
-        resources->loadTexture("bg/nature",   "resources/textures/background/nature.png",      true);
-        resources->loadTexture("bg/lilies",   "resources/textures/background/lilies.png",      true);
-        resources->loadTexture("bg/water",    "resources/textures/background/water.png",       true);
-        resources->loadTexture("bg/waves",    "resources/textures/background/water_waves.png", true);
+        resources->loadTexture("bg/sky", "resources/textures/background/sky.png", true);
+        resources->loadTexture("bg/clouds", "resources/textures/background/clouds.png", true);
+        resources->loadTexture("bg/city_far", "resources/textures/background/city_far.png", true);
+        resources->loadTexture("bg/city", "resources/textures/background/city.png", true);
+        resources->loadTexture("bg/nature", "resources/textures/background/nature.png", true);
+        resources->loadTexture("bg/lilies", "resources/textures/background/lilies.png", true);
+        resources->loadTexture("bg/water", "resources/textures/background/water.png", true);
+        resources->loadTexture("bg/waves", "resources/textures/background/water_waves.png", true);
 
         resources->loadTexture("bg/moon", "resources/textures/background/moon.png", true);
         resources->loadTexture("bg/map_border", "resources/textures/background/map_border.png", true);
 
         // player
         resources->loadTexture("player", "resources/textures/player/player.png", false);
-
     }
     catch (std::exception e) {
         std::cout << e.what() << "\n";
@@ -216,22 +232,5 @@ void Game::load()
     player = new Player(resources);
 
     // SPLASH SCREEN
- /*   logo.setTexture(*resources->getTexture("logo"));
-    auto bounds = logo.getLocalBounds();
-    logo.setOrigin(bounds.width / 2, bounds.height / 2);
-    */
-    }
-
-void Game::pause()
-{
-    paused = !paused;
-    timeScale = paused ? 0.f : 1.f;
-
-    camera->moveTo({ player->getPosition().x, 0 });
-    splashTime = sf::Time::Zero;
-
-    splashFadingOut = !paused;
+    splashScreen = new SplashScreen(resources, *window);
 }
-
-
-
