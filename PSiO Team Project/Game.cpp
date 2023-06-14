@@ -87,19 +87,6 @@ void Game::run()
 void Game::update(sf::Time time)
 {
     sf::Time timeScaled = time * timeScale;
-
-    cooldown -= time;
-
-    //if (cooldown < sf::Time::Zero) {
-    //    cooldown = sf::Time::Zero;
-    //    
-    //    if (paused) {
-    //        paused = false;
-    //        timeScale = 1.f;
-    //    }
-
-    //    std::cout << "COOLDOWN\n";
-    //}
 }
 
 void Game::fixedUpdate(sf::Time time)
@@ -109,6 +96,16 @@ void Game::fixedUpdate(sf::Time time)
     background->fixedUpdate(time);
     background->moveMoon(camera->getView(Camera::GAME));
 
+    camera->fixedUpdate(time);
+    camera->fixToBounds(mapBounds);
+
+    splashScreen(time);
+
+
+
+    // Things, that work just when game is not paused
+    if (paused) return;
+
     player->fixedUpdate(timeScaled);
     sf::IntRect boundsWithOffset = mapBounds;
     boundsWithOffset.left += background->getOffset() * 3;
@@ -117,14 +114,7 @@ void Game::fixedUpdate(sf::Time time)
 
     sf::Vector2f pos = player->getPosition();
     pos.y -= 100;
-    if (!paused) camera->moveTo(pos);
-
-    camera->fixedUpdate(time);
-    camera->fixToBounds(mapBounds);
-
-    // ...
-
-    splashScreen(time);
+    camera->moveTo(pos);
 }
 
 
@@ -169,14 +159,6 @@ void Game::handleEvents()
             if (event.key.code == sf::Keyboard::Escape)
             {
                 pause();
-                //if (cooldown == sf::Time::Zero) {
-                //    if (!paused) pause();
-                //    else unpause();
-
-                //    cooldown = cooldownDuration;
-                //}
-
-                // [TODO] - instant pause on pause, and unpause after animation cooldown
             }
         }
 
@@ -259,25 +241,6 @@ void Game::pause()
     splashTime = sf::Time::Zero;
 
     splashFadingOut = !paused;
-    /*paused = true;
-    timeScale = 0.f;
-
-    camera->moveTo({ player->getPosition().x, 0 });
-    splashTime = sf::Time::Zero;
-
-    splashFadingOut = false;*/
-
-    std::cout << "PAUSE\n";
-}
-
-void Game::unpause()
-{
-    std::cout << "UNPAUSE\n";
-
-    camera->moveTo(player->getPosition());
-    splashTime = sf::Time::Zero;
-
-    splashFadingOut = true;
 }
 
 

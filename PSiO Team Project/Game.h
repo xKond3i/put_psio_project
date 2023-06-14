@@ -35,11 +35,7 @@ private:
 	const unsigned int fps = 90;
 
 	float timeScale = 1.f;
-	bool  paused = false;
-
-	bool cooldownFlag = false;
-	sf::Time cooldown = sf::Time::Zero;
-	sf::Time cooldownDuration = sf::seconds(2);
+	bool paused = false;
 
 	//sf::VideoMode windowSize = { 1920, 1080 };
 	sf::VideoMode windowSize = { 1280, 720 };
@@ -84,7 +80,6 @@ private:
 	/* ---------- METHODS ---------- */
 	void load();
 	void pause();
-	void unpause();
 	void splashScreen(sf::Time time);
 
 public:

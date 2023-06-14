@@ -13,7 +13,6 @@
 
 // OTHER
 #include <vector>
-#include <iostream>
 
 class Player : public AnimatedSprite
 {
@@ -25,8 +24,8 @@ private:
 	int dir = 0;
 	int slideDir = 0;
 	float speed = 0;
-	float maxSpeed = .25f;
-	float acceleration = .1f;
+	float maxSpeed = 25;
+	float acceleration = maxSpeed/100.f;
 
 	bool holdingLeft = false;
 	bool holdingRight = false;
