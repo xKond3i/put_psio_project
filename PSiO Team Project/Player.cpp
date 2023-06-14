@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(ResourceManager* resources)
+Player::Player(ResourceManager* resources, SoundManager* sm)
 {
     std::vector<sf::IntRect> frames_;
     for (int i = 0; i < (int)frameCount; ++i) {
@@ -17,7 +17,10 @@ Player::Player(ResourceManager* resources)
     setPosition(96 + bounds.width / 2, 400);
 
     //Fishing Rod
-    FR = new FishingRod(resources,getPosition());
+    FR = new FishingRod(resources,sm,getPosition());
+
+    //Sound manager
+    SM = sm;
 }
 
 Player::~Player()

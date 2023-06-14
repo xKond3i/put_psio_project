@@ -9,7 +9,7 @@ Game::Game()
     event = sf::Event();
 
     resources = new ResourceManager();
-    soundManager = new SoundManager();
+    soundManager = new SoundManager(resources);
     camera = new Camera(windowSize);
 
     // --- components that NEED resource manager will be created in load method
@@ -235,6 +235,7 @@ void Game::load()
     /* ---------- SOUNDS ---------- */
     try {
         // background
+        resources->loadSound("baitSplash", "./resources/sounds/bait_splash.wav");
         // ...
     }
     catch (std::exception e) {
@@ -243,7 +244,7 @@ void Game::load()
 
     // --- components that need resources
     background = new Background(resources, mapBounds);
-    player = new Player(resources);
+    player = new Player(resources,soundManager);
 
     // SPLASH SCREEN
     splashScreen = new SplashScreen(resources, *window);

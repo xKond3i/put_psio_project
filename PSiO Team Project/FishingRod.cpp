@@ -1,18 +1,19 @@
 #include "FishingRod.h"
 
 
-FishingRod::FishingRod(ResourceManager* resources, sf::Vector2f tadziuPos)
+FishingRod::FishingRod(ResourceManager* resources, SoundManager* sm, sf::Vector2f tadziuPos)
 {
 	bait.setTexture(*resources->getTexture("bait1"));
 	bait.setOrigin(bait.getLocalBounds().width / 2, 0);
 	tadziuPos.y -= 28;
 	bait.setPosition(tadziuPos);
 	baitMaxPosUP = tadziuPos.y;
+	SM = sm;
 }
 
 FishingRod::~FishingRod()
 {
-
+	
 }
 
 void FishingRod::fixedUpdate(sf::Time time)
@@ -30,7 +31,13 @@ void FishingRod::fixedUpdate(sf::Time time)
 	}
 	if (baitMaxPosUP == bait.getPosition().y) {
 		baitInAction = false;
+		soundPlayed = false;
 	}
+	if (bait.getPosition().y > baitMaxPosUP + 32 && !soundPlayed) {
+		SM->playSound("baitSplash");
+		soundPlayed = true;
+	}
+
 	
 	
 

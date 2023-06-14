@@ -1,6 +1,8 @@
 #pragma once
 
 #include <SFML/Audio.hpp>
+#include <iostream>
+#include "ResourceManager.h"
 
 class SoundManager
 {
@@ -9,8 +11,13 @@ private:
 	sf::Music music;
 	sf::Music backgroundSound;
 
+	sf::Sound effects;
+	ResourceManager *resources;
+
 public:
-	SoundManager();
+	SoundManager(ResourceManager* r);
 	~SoundManager();
+
+	void playSound(std::string soundName);
 
 };

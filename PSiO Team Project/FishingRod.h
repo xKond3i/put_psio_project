@@ -7,6 +7,7 @@
 
 // RESOURCES
 #include "ResourceManager.h"
+#include "SoundManager.h"
 
 // BASE
 #include "AnimatedSprite.h"
@@ -26,9 +27,12 @@ private:
 	sf::Vector2f fishingRodPosition;
 	int verticalDir = 0;
 	bool baitInAction = false;
+	bool soundPlayed = false;
+	SoundManager *SM;
 public:
 
-	FishingRod(ResourceManager*, sf::Vector2f tadziuPos);
+
+	FishingRod(ResourceManager*, SoundManager* sm, sf::Vector2f tadziuPos);
 	~FishingRod();
 
 	/* ---------- METHODS ---------- */

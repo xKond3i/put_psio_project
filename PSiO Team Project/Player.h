@@ -34,8 +34,9 @@ private:
 	bool holdingRight = false;
 
 public:
+	SoundManager* SM;
 	FishingRod* FR;
-	Player(ResourceManager* resources);
+	Player(ResourceManager* resources, SoundManager* sm);
 	~Player();
 
 	/* ---------- METHODS ---------- */
