@@ -23,9 +23,6 @@ private:
 	sf::Vector2i frameSize = {64, 64};
 	unsigned int frameCount = 4;
 
-	// fishing rod
-	FishingRod* FR;
-
 	// moving
 	int dir = 0;
 	int slideDir = 0;
@@ -37,7 +34,9 @@ private:
 	bool holdingRight = false;
 
 public:
-	Player(ResourceManager* resources);
+	SoundManager* SM;
+	FishingRod* FR;
+	Player(ResourceManager* resources, SoundManager* sm);
 	~Player();
 
 	/* ---------- METHODS ---------- */
@@ -49,5 +48,8 @@ public:
 	void fixedUpdate(sf::Time time); // physics take place here.
 
 	void draw(sf::RenderTarget& target);
+
+	
+
 
 };

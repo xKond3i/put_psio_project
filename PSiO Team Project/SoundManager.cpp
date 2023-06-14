@@ -1,6 +1,6 @@
 #include "SoundManager.h"
 
-SoundManager::SoundManager()
+SoundManager::SoundManager(ResourceManager* r)
 {
     // --- music
     music.openFromFile("./resources/music/background_music.ogg");
@@ -12,9 +12,20 @@ SoundManager::SoundManager()
     backgroundSound.setLoop(true);
     backgroundSound.play();
     backgroundSound.setVolume(25);
+
+    resources = r;
+   
+
 }
 
 SoundManager::~SoundManager()
 {
+    
+}
 
+void SoundManager::playSound(std::string soundName)
+{
+    effects.setBuffer(*resources->getSound(soundName));
+    effects.setVolume(5);
+    effects.play();
 }
