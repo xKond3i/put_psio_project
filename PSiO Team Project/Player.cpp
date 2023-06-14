@@ -15,6 +15,9 @@ Player::Player(ResourceManager* resources)
     setOrigin(bounds.width / 2, bounds.height);
 
     setPosition(96 + bounds.width / 2, 400);
+
+    //Fishing Rod
+    FR = new FishingRod(resources);
 }
 
 Player::~Player()
