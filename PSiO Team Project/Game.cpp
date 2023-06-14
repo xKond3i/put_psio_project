@@ -107,9 +107,16 @@ void Game::fixedUpdate(sf::Time time)
     boundsWithOffset.width -= background->getOffset() * 6;
     player->checkFrameCollision(boundsWithOffset);
 
-    sf::Vector2f pos = player->getPosition();
-    pos.y -= 100;
-    camera->moveTo(pos);
+    
+    if (player->FR->getInAction()) {
+        sf::Vector2f pos = player->FR->getBaitPos();    
+        camera->moveTo(pos);
+    }
+    else {
+        sf::Vector2f pos = player->getPosition();    
+        pos.y -= 100;
+        camera->moveTo(pos);
+    }
 }
 
 
@@ -173,6 +180,8 @@ void Game::handleEvents()
         camera->handleEvents(event);
 
         player->handleEvents(event);
+
+        
     }
 }
 
