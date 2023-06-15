@@ -28,6 +28,7 @@ void SoundManager::playSound(std::string soundName)
 {
     effects.setBuffer(*resources->getSound(soundName));
     effects.play();
+    Playing = true;
 }
 
 void SoundManager::setMuted(bool muted)
@@ -42,4 +43,9 @@ void SoundManager::setMuted(bool muted)
         backgroundSound.setVolume(25);
         effects.setVolume(5);
     }
+}
+
+bool SoundManager::isPlaying()
+{
+    return Playing;
 }

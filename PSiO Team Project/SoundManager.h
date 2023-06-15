@@ -14,6 +14,8 @@ private:
 	sf::Sound effects;
 	ResourceManager *resources;
 
+	bool Playing = false;
+
 public:
 	SoundManager(ResourceManager* r);
 	~SoundManager();
@@ -21,5 +23,7 @@ public:
 	void playSound(std::string soundName);
 
 	void setMuted(bool muted);
+
+	bool isPlaying();
 
 };

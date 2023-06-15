@@ -230,6 +230,9 @@ void Game::load()
         resources->loadTexture("btn_exit", "resources/textures/UI/exit.png", false);
         resources->loadTexture("btn_muted", "resources/textures/UI/muted.png", false);
         resources->loadTexture("btn_unmuted", "resources/textures/UI/unmuted.png", false);
+
+        // FISH
+        resources->loadTexture("fish1", "resources/textures/catchables/1.png", false);
     }
     catch (std::exception e) {
         std::cout << e.what() << "\n";
@@ -239,6 +242,7 @@ void Game::load()
     try {
         // background
         resources->loadSound("splash", "./resources/sounds/bait_splash.wav");
+        resources->loadSound("reel", "./resources/sounds/fishing_reel_cut.wav");
         // ...
     }
     catch (std::exception e) {

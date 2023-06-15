@@ -22,6 +22,7 @@ void FishingRod::fixedUpdate(sf::Time time)
 
 	if (verticalDir == 1 && baitInAction) {
 		bait.move(0, speed * t);
+		SM->playSound("reel");		
 	}
 	if ((verticalDir == -1 && baitMaxPosUP < bait.getPosition().y)
 		|| (!baitInAction && baitMaxPosUP < bait.getPosition().y && verticalDir != -1)) {
@@ -35,6 +36,8 @@ void FishingRod::fixedUpdate(sf::Time time)
 		SM->playSound("splash");
 		soundPlayed = true;
 	}
+	
+	
 	
 }
 
