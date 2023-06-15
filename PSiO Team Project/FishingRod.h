@@ -33,6 +33,7 @@ private:
 
 	bool baitInAction = false;
 	bool soundPlayed = false;
+	bool baitGoingUp = false;
 
 	SoundManager *SM;
 

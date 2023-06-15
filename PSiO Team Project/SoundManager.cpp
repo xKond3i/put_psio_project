@@ -17,6 +17,7 @@ SoundManager::SoundManager(ResourceManager* r)
 
     effects.setVolume(5);
 
+
 }
 
 SoundManager::~SoundManager()
@@ -24,10 +25,20 @@ SoundManager::~SoundManager()
     
 }
 
-void SoundManager::playSound(std::string soundName)
+void SoundManager::playSound(std::string soundName, int canal)
 {
-    effects.setBuffer(*resources->getSound(soundName));
-    effects.play();
+    if (canal == 1) {
+        effects.setBuffer(*resources->getSound(soundName));
+        effects.play();
+        effects.setVolume(5);
+    }
+
+    if (canal == 2) {
+        effects2.setBuffer(*resources->getSound(soundName));
+        effects2.play();
+        effects2.setLoop(true);
+        effects2.setVolume(5);
+    }
     Playing = true;
 }
 
