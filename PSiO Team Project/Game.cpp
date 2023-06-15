@@ -13,6 +13,7 @@ Game::Game()
     camera = new Camera(windowSize);
 
     // --- components that NEED resource manager will be created in load method
+    splashScreen = nullptr;
     background = nullptr;
     player = nullptr;
 
@@ -279,5 +280,8 @@ void Game::load()
     splashScreen = new SplashScreen(resources, soundManager, *window);
 
     // SPAWN FISH
-    fishes.push_back(new Fish(resources, 1, player->getPosition().y + 32));
+    for (int i = 0; i < fishCount; ++i) {
+        int type = rand() % Fish::maxType + 1;
+        fishes.push_back(new Fish(resources, type, player->getPosition().y + 32, mapBounds));
+    }
 }

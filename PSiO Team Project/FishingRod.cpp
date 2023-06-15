@@ -35,11 +35,13 @@ void FishingRod::fixedUpdate(sf::Time time)
 		baitGoingUp = true;
 		bait.move(0, -speed * t);
 	}
+
 	if (baitMaxPosUP == bait.getPosition().y) {
 		baitInAction = false;
 		soundPlayed = false;
 		baitGoingUp = false;
 	}
+
 	if (bait.getPosition().y > baitMaxPosUP + 16 && !soundPlayed) {
 		SM->playSound("splash", 1);
 		soundPlayed = true;

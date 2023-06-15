@@ -28,6 +28,7 @@ Tadeusz Bugalski ([@Tadeq-hash](https://github.com/Tadeq-hash)), który zezwoli�
 **Free to use resources used in the project:**
 - [**@CRAFTPIX.NET** — FREE FISHING GAME ASSETS PIXEL ART PACK](https://craftpix.net/freebies/free-fishing-game-assets-pixel-art-pack/)
 - [**@CRAFTPIX.NET** — FREE CITY BACKGROUNDS PIXEL ART](https://craftpix.net/freebies/free-city-backgrounds-pixel-art/)
-- [**@SHUBIBUBI**'s COZY FISHING ASSET PACK](https://shubibubi.itch.io/cozy-fishing)
+- [**ITCH.IO** — FREE RPG ASSET TILESET MARKETPLACE PACK](https://gif-superretroworld.itch.io/marketplace) by [@GIF](https://twitter.com/gif_not_jif)
+- [**ITCH.IO** — **@SHUBIBUBI**'s COZY FISHING ASSET PACK](https://shubibubi.itch.io/cozy-fishing)
 - [**@FONTAWESOME.COM**](https://fontawesome.com/) provided Us with icons (We made them pixelated)!
 - [**@MIXKIT.CO**](https://mixkit.co/free-sound-effects/) provided Us with music ans sound!

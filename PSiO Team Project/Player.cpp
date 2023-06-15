@@ -110,7 +110,7 @@ void Player::fixedUpdate(sf::Time time)
     else move({ speed * dir * t, 0 });
 
     // BLOCK FROM FISHING WHILE MOVING
-    FR->setInAction(0);
+    if (dir != 0) FR->setInAction(0);
 }
 
 void Player::draw(sf::RenderTarget& target)
