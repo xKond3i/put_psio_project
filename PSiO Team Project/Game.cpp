@@ -200,6 +200,9 @@ void Game::handleEvents()
         player->handleEvents(event);
 
         splashScreen->handleEvents(event, *window, paused);
+
+        window->setView(*camera->getView(Camera::UI));
+        hud->handleEvents(event, *window);
         
         if (splashScreen->getWantToUnpause()) pause();
         if (splashScreen->getWantToExit()) window->close();
@@ -266,6 +269,9 @@ void Game::load()
         resources->loadTexture("btn_muted", "resources/textures/UI/muted.png", false);
         resources->loadTexture("btn_unmuted", "resources/textures/UI/unmuted.png", false);
         resources->loadTexture("money", "resources/textures/UI/money.png", false);
+        resources->loadTexture("bait_upgrade", "resources/textures/UI/upgrade_hook.png", false);
+        resources->loadTexture("length_upgrade", "resources/textures/UI/upgrade_length.png", false);
+
         
         //shop
 
