@@ -13,9 +13,9 @@ private:
 
 	sf::Sound effects;
 	sf::Sound effectsBg;
-	ResourceManager *resources;
 
-	bool Playing = false;
+	// RM
+	ResourceManager *resources;
 
 	// initial volume
 	static const unsigned int musicVol = 5;
@@ -30,8 +30,10 @@ public:
 
 	void playSound(std::string soundName, int channel);
 
-	void setMuted(bool muted);
+	void setSound(std::string soundName, int channel);
+	void pauseSound(int channel);
+	void unpauseSound(int channel);
 
-	bool isPlaying();
+	void setMuted(bool muted);
 
 };

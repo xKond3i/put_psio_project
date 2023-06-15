@@ -87,6 +87,8 @@ void Game::run()
 void Game::update(sf::Time time)
 {
     sf::Time timeScaled = time * timeScale;
+
+    // ...
 }
 
 void Game::fixedUpdate(sf::Time time)
@@ -253,9 +255,6 @@ void Game::load()
         resources->loadTexture("btn_exit", "resources/textures/UI/exit.png", false);
         resources->loadTexture("btn_muted", "resources/textures/UI/muted.png", false);
         resources->loadTexture("btn_unmuted", "resources/textures/UI/unmuted.png", false);
-
-        // FISH
-        resources->loadTexture("fish1", "resources/textures/catchables/1.png", false);
     }
     catch (std::exception e) {
         std::cout << e.what() << "\n";

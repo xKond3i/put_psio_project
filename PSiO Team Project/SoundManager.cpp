@@ -12,8 +12,8 @@ SoundManager::SoundManager(ResourceManager* r)
 
     backgroundSound.openFromFile("./resources/music/crickets_background_noises.wav");
     backgroundSound.setLoop(true);
-    backgroundSound.play();
     backgroundSound.setVolume(bgVol);
+    backgroundSound.play();
 
     effects.setVolume(effectsVol);
     effectsBg.setVolume(effectsBgVol);
@@ -38,8 +38,45 @@ void SoundManager::playSound(std::string soundName, int channel)
         effectsBg.setLoop(true);
         break;
     }
+}
 
-    Playing = true;
+void SoundManager::setSound(std::string soundName, int channel)
+{
+    switch (channel) {
+    case 1:
+        effects.setBuffer(*resources->getSound(soundName));
+        break;
+    case 2:
+        if (effectsBg.getBuffer() == resources->getSound(soundName)) break;
+
+        effectsBg.setBuffer(*resources->getSound(soundName));
+        effectsBg.setLoop(true);
+        break;
+    }
+}
+
+void SoundManager::pauseSound(int channel)
+{
+    switch (channel) {
+    case 1:
+        effects.pause();
+        break;
+    case 2:
+        effectsBg.pause();
+        break;
+    }
+}
+
+void SoundManager::unpauseSound(int channel)
+{
+    switch (channel) {
+    case 1:
+        effects.play();
+        break;
+    case 2:
+        if (effectsBg.getStatus() != sf::SoundSource::Status::Playing) effectsBg.play();
+        break;
+    }
 }
 
 void SoundManager::setMuted(bool muted)
@@ -47,6 +84,7 @@ void SoundManager::setMuted(bool muted)
     if (muted) {
         music.setVolume(0);
         backgroundSound.setVolume(0);
+
         effects.setVolume(0);
         effectsBg.setVolume(0);
     }
@@ -57,9 +95,4 @@ void SoundManager::setMuted(bool muted)
         effects.setVolume(effectsVol);
         effectsBg.setVolume(effectsBgVol);
     }
-}
-
-bool SoundManager::isPlaying()
-{
-    return Playing;
 }
