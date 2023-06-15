@@ -2,17 +2,20 @@
 
 HUD::HUD(ResourceManager* resources, sf::RenderWindow& window)
 {
-
-	//text.setFont(*resources->getFont("pixel_font"));
-	//text.setPosition(0, 0);
-	//auto bounds = text.getLocalBounds();
-	//text.setOrigin(bounds.width / 2, bounds.height / 2);
-	//text.setString(std::to_string(money));
+	
+	text.setFont(*resources->getFont("pixel_font"));
+	text.setFillColor(sf::Color(0, 188, 76));
+	text.setOrigin(0, text.getLocalBounds().left/2);
+	text.setString(std::to_string(money)+"$");
+	text.setPosition(window.mapPixelToCoords({100,20}));
+	text.setScale(0.4, 0.4);
 
 	//moneysprite
 	moneySprite.setTexture(*resources->getTexture("money"));
-	moneySprite.setOrigin({ moneySprite.getLocalBounds().width / 2, moneySprite.getLocalBounds().height / 2 });
-	moneySprite.setPosition(window.mapPixelToCoords({ 0, 0 }));
+	moneySprite.setOrigin({ 0,0 });
+	moneySprite.setScale(0.25, 0.25);
+	moneySprite.setPosition(window.mapPixelToCoords({ 20, 20 }));
+
 }
 
 HUD::~HUD()
@@ -21,7 +24,6 @@ HUD::~HUD()
 
 void HUD::draw(sf::RenderTarget& target)
 {
-	//target.draw(text); 
-	//target.draw(shop);
+	target.draw(text); 
 	target.draw(moneySprite);
 }
