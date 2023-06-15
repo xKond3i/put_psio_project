@@ -37,7 +37,7 @@ void SoundManager::playSound(std::string soundName, int canal)
         effects2.setBuffer(*resources->getSound(soundName));
         effects2.play();
         effects2.setLoop(true);
-        effects2.setVolume(5);
+        effects2.setVolume(10);
     }
     Playing = true;
 }
