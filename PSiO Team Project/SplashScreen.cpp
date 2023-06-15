@@ -47,10 +47,19 @@ void SplashScreen::draw(sf::RenderTarget& target)
     }
 }
 
-void SplashScreen::play(sf::Time time){
+void SplashScreen::play(sf::Time time)
+{
+    float progress = splashTime / splashTimeEnd;
+
+    progress = progress > 1.f ? 1.f : progress < 0.f ? 0.f : progress;
+    if (splashFadingOut) progress = 1.f - progress;
+
     for (const auto& pair : buttons) {
         auto name = pair.first;
         auto btn = pair.second;
+
+        if (progress < 1) break;
+
         if (name == "exit") btn->animate(time, sf::Color(220, 20, 60));
         else btn->animate(time);
     }
@@ -64,10 +73,6 @@ void SplashScreen::play(sf::Time time){
     }
 
     splashTime += time;
-
-    float progress = splashTime / splashTimeEnd;
-    progress = progress > 1.f ? 1.f : progress < 0.f ? 0.f : progress;
-    if (splashFadingOut) progress = 1.f - progress;
 
     sf::Uint8 alpha = (int)(255 * progress);
     dimm.setFillColor({ 0, 0, 0, (splashFirstTime ? alpha : sf::Uint8(alpha / 2)) });
@@ -120,8 +125,13 @@ void SplashScreen::handleEvents(sf::Event event, sf::RenderTarget& window, bool 
 
     if (event.type == sf::Event::MouseMoved)
     {
+        // DON'T CHECK IF ANIMATION PLAYING
+        float progress = splashTime / splashTimeEnd;
+        if (progress < 1) return;
+
         sf::Vector2f coords = window.mapPixelToCoords({ event.mouseMove.x, event.mouseMove.y });
 
+        // HOVERING EFFECT
         for (const auto& pair : buttons) {
             auto btn = pair.second;
             btn->setHovered(btn->getGlobalBounds().contains(coords));
@@ -130,8 +140,14 @@ void SplashScreen::handleEvents(sf::Event event, sf::RenderTarget& window, bool 
 
     if (event.type == sf::Event::MouseButtonPressed)
     {
+        // DON'T CHECK IF ANIMATION PLAYING
+        float progress = splashTime / splashTimeEnd;
+        if (progress < 1) return;
+
+        // LEFT BUTTON CLICKED
         if (event.mouseButton.button != sf::Mouse::Left) return;
 
+        // BUTTONS ACTIONS
         for (const auto& pair : buttons) {
             auto name = pair.first;
             auto btn = pair.second;

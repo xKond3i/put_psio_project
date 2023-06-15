@@ -8,6 +8,11 @@ FishingRod::FishingRod(ResourceManager* resources, SoundManager* sm, sf::Vector2
 	tadziuPos.y -= 28;
 	bait.setPosition(tadziuPos);
 	baitMaxPosUP = tadziuPos.y;
+
+	baitMaxPosDOWN = upgradesLW[currentLineWidth];
+	speed = upgradesS[currentSpeed];
+
+	// SM
 	SM = sm;
 }
 
@@ -20,7 +25,7 @@ void FishingRod::fixedUpdate(sf::Time time)
 {
 	float t = time.asSeconds();
 
-	if (verticalDir == 1 && baitInAction) {
+	if (verticalDir == 1 && baitInAction && baitMaxPosUP + baitMaxPosDOWN >= bait.getPosition().y) {
 		bait.move(0, speed * t);
 	}
 	if ((verticalDir == -1 && baitMaxPosUP < bait.getPosition().y)
@@ -107,4 +112,3 @@ bool FishingRod::getInAction()
 {
 	return baitInAction;
 }
-

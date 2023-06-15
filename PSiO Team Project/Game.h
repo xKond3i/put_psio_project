@@ -8,7 +8,10 @@
 // OTHER libraries
 #include <windows.h> // for maximizing window
 
+#include <random>
+#include <time.h>
 #include <string>
+#include <vector>
 
 // RESOURCES
 #include "ResourceManager.h"
@@ -21,6 +24,7 @@
 // COMPONENTS
 #include "Background.h"
 #include "Player.h"
+#include "Fish.h"
 
 
 
@@ -64,6 +68,9 @@ private:
 	// --- COMPONENTS
 	Background* background;
 	Player* player;
+	std::vector<Fish*> fishes;
+
+	int fishCount = 75;
 
 	/* ---------- METHODS ---------- */
 	void load();

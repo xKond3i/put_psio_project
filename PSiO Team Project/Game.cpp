@@ -23,6 +23,9 @@ Game::Game()
 
     icon.loadFromFile("resources/textures/icon.png");
     window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+
+    // RANDOM SEED
+    srand(time(NULL));
 }
 
 Game::~Game()
@@ -30,6 +33,8 @@ Game::~Game()
     // objects first
     delete background;
     delete player;
+
+    fishes.clear();
 
     delete splashScreen;
 
@@ -117,6 +122,11 @@ void Game::fixedUpdate(sf::Time time)
         pos.y -= 100;
         camera->moveTo(pos);
     }
+
+    // fishes
+    for (const auto& f : fishes) {
+        f->fixedUpdate(timeScaled);
+    }
 }
 
 
@@ -132,6 +142,11 @@ void Game::draw()
 
     background->draw(*window);
     player->draw(*window);
+
+    // fishes
+    for (const auto& f : fishes) {
+        f->draw(*window);
+    }
 
 
 
@@ -220,6 +235,14 @@ void Game::load()
         // player
         resources->loadTexture("player", "resources/textures/player/player.png", false);
 
+        // fishes
+        resources->loadTexture("fish1", "resources/textures/catchables/1.png", false);
+        resources->loadTexture("fish2", "resources/textures/catchables/2.png", false);
+        resources->loadTexture("fish3", "resources/textures/catchables/3.png", false);
+        resources->loadTexture("fish4", "resources/textures/catchables/4.png", false);
+        resources->loadTexture("fish5", "resources/textures/catchables/5.png", false);
+        resources->loadTexture("fish6", "resources/textures/catchables/6.png", false);
+
         // bait
         resources->loadTexture("bait1", "resources/textures/baits/1.png", false);
         resources->loadTexture("bait2", "resources/textures/baits/2.png", false);
@@ -251,4 +274,7 @@ void Game::load()
 
     // SPLASH SCREEN
     splashScreen = new SplashScreen(resources, soundManager, *window);
+
+    // SPAWN FISH
+    fishes.push_back(new Fish(resources, 1, player->getPosition().y + 32));
 }
