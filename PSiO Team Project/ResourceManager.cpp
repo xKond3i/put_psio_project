@@ -46,6 +46,24 @@ bool ResourceManager::loadSound(std::string name, std::string path)
     return true;
 }
 
+bool ResourceManager::loadFont(std::string name, std::string path)
+{
+    std::transform(name.begin(), name.end(), name.begin(), ::toupper);
+
+    std::shared_ptr<sf::Font> font = std::make_shared<sf::Font>();
+    if (!font->loadFromFile(path)) {
+        throw std::runtime_error("[!] failed to load font... [" + path + "]");
+        return false;
+    }
+    if (fonts.count(name) > 0) {
+        throw std::runtime_error("[!] overriding font... [" + name + "]");
+        return false;
+    }
+    fonts[name] = font;
+    return true;
+}
+
+
 
 
 sf::Texture* ResourceManager::getTexture(std::string name)
@@ -65,6 +83,17 @@ sf::SoundBuffer* ResourceManager::getSound(std::string name)
 
     auto pos = sounds.find(name);
     if (pos != sounds.end()) {
+        return pos->second.get();
+    }
+    return nullptr;
+}
+
+sf::Font* ResourceManager::getFont(std::string name)
+{
+    std::transform(name.begin(), name.end(), name.begin(), ::toupper);
+
+    auto pos = fonts.find(name);
+    if (pos != fonts.end()) {
         return pos->second.get();
     }
     return nullptr;

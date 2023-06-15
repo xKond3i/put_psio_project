@@ -45,6 +45,7 @@ void SplashScreen::draw(sf::RenderTarget& target)
             target.draw(*btn);
         }
     }
+
 }
 
 void SplashScreen::play(sf::Time time)

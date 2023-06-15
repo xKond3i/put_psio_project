@@ -13,9 +13,11 @@ Game::Game()
     camera = new Camera(windowSize);
 
     // --- components that NEED resource manager will be created in load method
+    
     splashScreen = nullptr;
     background = nullptr;
     player = nullptr;
+    hud = nullptr;
 
     // --- ADDITIONAL CONFIGURATION
     //ShowWindow(window->getSystemHandle(), SW_MAXIMIZE); // maximize window
@@ -38,6 +40,8 @@ Game::~Game()
     fishes.clear();
 
     delete splashScreen;
+
+    delete hud;
 
 
 
@@ -138,13 +142,14 @@ void Game::draw()
 {
     window->clear(fillColor); // clear previous frame // sf::Color(3, 4, 94, 255)
 
-
+    
 
     // --- Game View
     window->setView(*camera->getView(Camera::GAME));
 
     background->draw(*window);
     player->draw(*window);
+
 
     // fishes
     for (const auto& f : fishes) {
@@ -157,7 +162,8 @@ void Game::draw()
     window->setView(*camera->getView(Camera::UI));
 
     splashScreen->draw(*window);
-
+    hud->draw(*window);
+    
 
 
     window->display(); // show current frame
@@ -256,6 +262,17 @@ void Game::load()
         resources->loadTexture("btn_exit", "resources/textures/UI/exit.png", false);
         resources->loadTexture("btn_muted", "resources/textures/UI/muted.png", false);
         resources->loadTexture("btn_unmuted", "resources/textures/UI/unmuted.png", false);
+        resources->loadTexture("money", "resources/textures/UI/money.png", false);
+        
+        //shop
+
+        resources->loadTexture("shop", "resources/textures/UI/shop-bg.png",false);
+        
+        //FONT
+
+        resources->loadFont("pixel_font", "resources/fonts/pixel_font.ttf");
+
+       
     }
     catch (std::exception e) {
         std::cout << e.what() << "\n";
@@ -275,9 +292,11 @@ void Game::load()
     // --- components that need resources
     background = new Background(resources, mapBounds);
     player = new Player(resources,soundManager);
+    
 
     // SPLASH SCREEN
     splashScreen = new SplashScreen(resources, soundManager, *window);
+    hud = new HUD(resources, *window);
 
     // SPAWN FISH
     for (int i = 0; i < fishCount; ++i) {
