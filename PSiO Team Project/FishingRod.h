@@ -12,10 +12,12 @@
 // BASE
 #include "AnimatedSprite.h"
 
+// COMPONENTS
+#include "Fish.h"
+
 // OTHER
 #include <vector>
 #include <iostream>
-
 
 class FishingRod
 {
@@ -29,23 +31,26 @@ private:
 	float baitMaxPosUP;
 	float baitMaxPosDOWN;
 
+	float waterOffset = 16;
+
 	int verticalDir = 0;
-	float speed = 50;
+
+	float speed;
+	float fishAttentionRadius;
+	float lineLength;
 
 	bool baitInAction = false;
 	bool soundPlayed = false;
 	bool baitGoingUp = false;
 
+	// CATCHING MECHANICS
+	float stress = 0; // 0.f - 1.f
+	Fish* caught = nullptr;
+
 	// UPGARDES
-	int currentLineWidth = 0;
-	int currentSpeed = 0;
-	int currentAttractiveness = 0;
-
-	static const int maxUpgrades = 3;
-
-	int upgradesLW[maxUpgrades] = { 200, 450, 768 };
-	int upgradesS[maxUpgrades] = { 50, 75, 110 };
-	float upgradesA[maxUpgrades] = { .4f, .6f, .9f };
+	int currentLineLength;
+	int currentSpeed;
+	int currentFishAttentionRadius;
 
 	// IMPORTANT
 	SoundManager *SM;
@@ -63,11 +68,23 @@ public:
 
 	void handleEvents(sf::Event event);
 
+
+	void scanFishes(std::vector<Fish*>& fishes);
+
+
 	sf::Vector2f getBaitPos();
 
 	void setLineOrigin(sf::Vector2f baitOrigin, sf::Vector2f tadziuScale);
 
 	void setInAction(bool baitInAction_);
 	bool getInAction();
+
+
+
+	static inline const int maxUpgrades = 3;
+
+	static inline const int upgradesLL[maxUpgrades] = { 200, 450, 768 };
+	static inline int upgradesS[maxUpgrades] = { 50, 75, 110 };
+	static inline float upgradesFAR[maxUpgrades] = { 10, 25, 50 };
 
 };

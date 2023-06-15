@@ -107,6 +107,7 @@ Background::Background(ResourceManager* resources, sf::IntRect mapBounds_)
 
 Background::~Background()
 {
+    for (auto p : layers) delete p.second;
     layers.clear();
 
     delete borderSymbolLeft;
@@ -173,7 +174,3 @@ void Background::moveMoon(sf::View* view)
 
     moon.setPosition({ center.x + size.x / 2 - offset, offset });
 }
-
-inline int Layer::MOVING_ZIGZAG = 2;
-inline int Layer::MOVING_ALWAYS = 1;
-inline int Layer::MOVING_NEVER = 0;

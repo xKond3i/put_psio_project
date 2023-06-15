@@ -35,6 +35,7 @@ Game::~Game()
     delete background;
     delete player;
 
+    for (auto p : fishes) delete p;
     fishes.clear();
 
     delete splashScreen;
@@ -119,6 +120,8 @@ void Game::fixedUpdate(sf::Time time)
     if (player->getFR()->getInAction()) {
         sf::Vector2f pos = player->getFR()->getBaitPos();    
         camera->moveTo(pos);
+
+        player->getFR()->scanFishes(fishes);
     }
     else {
         sf::Vector2f pos = player->getPosition();    

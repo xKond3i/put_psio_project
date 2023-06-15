@@ -29,9 +29,9 @@ public:
 	Layer(sf::Texture* texture, sf::IntRect size, sf::Vector2f pos, int moving_=Layer::MOVING_NEVER, bool originBottom=true);
 	~Layer();
 
-	static int MOVING_ZIGZAG;
-	static int MOVING_ALWAYS;
-	static int MOVING_NEVER;
+	static inline int MOVING_ZIGZAG = 2;
+	static inline int MOVING_ALWAYS = 1;
+	static inline int MOVING_NEVER = 0;
 
 	void animate(sf::Time time, float parallaxIndex, float parallaxSpeed, float parallaxModifier);
 };

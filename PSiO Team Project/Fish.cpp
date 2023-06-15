@@ -17,7 +17,7 @@ Fish::Fish(ResourceManager* resources, int type, float startingY, sf::IntRect ma
 
     setTexture(*tex);
 
-    setOrigin(0, getLocalBounds().height / 2);
+    setOrigin(getLocalBounds().width / 2, getLocalBounds().height / 2);
 
     // STATS
     type -= 1;
@@ -76,12 +76,18 @@ void Fish::fixedUpdate(sf::Time time)
     move({ speed * dir * t * randomFactor, (zigZag ? step : -step) * t });
 }
 
-void Fish::baitCollision()
+void Fish::followBait(sf::Time time, sf::Vector2f target)
 {
+    float t = time.asSeconds();
 
-}
+    sf::Vector2f pos = getPosition();
+    sf::Vector2f dest = pos + (target - pos) * t * speed; // destination
 
-void Fish::boundsCollision()
-{
+    float d = hypot(dest.x - pos.x, dest.y - pos.y);
 
+    if (d < .4f && getRotation() < 90) {
+        rotate(t * speed * 45);
+    }
+
+    setPosition(dest);
 }

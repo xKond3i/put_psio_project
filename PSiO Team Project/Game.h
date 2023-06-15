@@ -77,7 +77,6 @@ private:
 	void load();
 	void pause();
 
-
 public:
 	Game();
 	~Game();

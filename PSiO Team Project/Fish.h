@@ -11,10 +11,9 @@
 // BASE
 #include "AnimatedSprite.h"
 
-// COMPONENTS
-#include "FishingRod.h"
-
+// OTHER
 #include <random>
+#include <iostream>
 
 class Fish : public AnimatedSprite
 {
@@ -42,8 +41,6 @@ public:
 	void draw(sf::RenderTarget& target);
 	void update(sf::Time time);		 // logic EXCEPT physics take place here!
 	void fixedUpdate(sf::Time time); // physics takes place here!
-	void boundsCollision();
-	void baitCollision();
 
 	// fish type stats
 	static const int maxType = 6;
@@ -51,5 +48,7 @@ public:
 	static inline float fishSpeeds[maxType] = { 30.f, 80.f, 50.f, 40.f, 10.f, 60.f };
 	static inline float fishStrengths[maxType] = { 5.f, 10.f, 30.f, 20.f, 40.f, 50.f };
 	static inline float fishPrices[maxType] = { 9.f, 14.f, 21.f, 49.f, 250.f, 200.f };
+
+	void followBait(sf::Time time, sf::Vector2f target);
 
 };
