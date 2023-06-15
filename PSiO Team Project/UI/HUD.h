@@ -15,7 +15,7 @@ class HUD
 private:
 
 	sf::Sprite moneySprite;
-	//sf::Text text;
+	sf::Text text;
 	int money = 0; 
 
 public:
