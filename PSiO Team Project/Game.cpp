@@ -120,7 +120,7 @@ void Game::fixedUpdate(sf::Time time)
     boundsWithOffset.width -= background->getOffset() * 6;
     player->checkFrameCollision(boundsWithOffset);
 
-    
+    hud->modifyMoney(player->getFR()->getCollectedMoney());
     if (player->getFR()->getInAction()) {
         sf::Vector2f pos = player->getFR()->getBaitPos();    
         camera->moveTo(pos);
@@ -265,14 +265,10 @@ void Game::load()
         resources->loadTexture("btn_exit", "resources/textures/UI/exit.png", false);
         resources->loadTexture("btn_muted", "resources/textures/UI/muted.png", false);
         resources->loadTexture("btn_unmuted", "resources/textures/UI/unmuted.png", false);
+
         resources->loadTexture("money", "resources/textures/UI/money.png", false);
         
-        //shop
-
-        resources->loadTexture("shop", "resources/textures/UI/shop-bg.png",false);
-        
         //FONT
-
         resources->loadFont("pixel_font", "resources/fonts/pixel_font.ttf");
 
        

@@ -21,6 +21,8 @@ private:
 	int type; // fish type
 
 	sf::Vector2f cycleRangeX; // will be randomized
+	float startingY;
+	sf::IntRect mapBounds;
 
 	// STATS
 	float swimmingDepth; // depending on fish type
@@ -53,5 +55,9 @@ public:
 
 	void followBait(sf::Time time, sf::Vector2f target);
 	float fight(sf::Time time);
+
+	void setFree();
+
+	int respawn();
 
 };

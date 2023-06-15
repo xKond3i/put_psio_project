@@ -45,7 +45,12 @@ private:
 
 	// CATCHING MECHANICS
 	float stress = 0; // 0.f - 1.f
+	float fightY = 0;
+	float maxFightDistance = 25;
+	bool lineBroke = false;
 	Fish* caught = nullptr;
+
+	int collectedMoney = 0;
 
 	// UPGARDES
 	int currentLineLength;
@@ -78,6 +83,8 @@ public:
 
 	void setInAction(bool baitInAction_);
 	bool getInAction();
+
+	int getCollectedMoney();
 
 
 

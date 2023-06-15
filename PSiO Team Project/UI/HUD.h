@@ -16,12 +16,17 @@ private:
 
 	sf::Sprite moneySprite;
 	sf::Text text;
+
 	int money = 0; 
 
 public:
 
 	HUD(ResourceManager* resources, sf::RenderWindow& window);
 	~HUD();
+
 	void draw(sf::RenderTarget& target);
+
+	int getMoney();
+	void modifyMoney(int value);
 
 };

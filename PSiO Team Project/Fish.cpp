@@ -1,6 +1,6 @@
 #include "Fish.h"
 
-Fish::Fish(ResourceManager* resources, int type, float startingY, sf::IntRect mapBounds)
+Fish::Fish(ResourceManager* resources, int type, float startingY_, sf::IntRect mapBounds_)
 {
     int frameCount = 2;
     std::vector<sf::IntRect> frames_;
@@ -18,6 +18,9 @@ Fish::Fish(ResourceManager* resources, int type, float startingY, sf::IntRect ma
     setTexture(*tex);
 
     setOrigin(getLocalBounds().width / 2, getLocalBounds().height / 2);
+
+    startingY = startingY_;
+    mapBounds = mapBounds_;
 
     // STATS
     type -= 1;
@@ -85,8 +88,8 @@ void Fish::followBait(sf::Time time, sf::Vector2f target)
 
     float d = hypot(dest.x - pos.x, dest.y - pos.y);
 
-    if (d < .4f && abs(getRotation() - 90.f) > 2.5f) {
-        rotate(t * strength * 45);
+    if (d < .4f && abs(getRotation() - (dir < 0 ? 90.f : 270.f)) > 5.f) {
+        rotate(t * 30);
     }
 
     setPosition(dest);
@@ -96,12 +99,29 @@ float Fish::fight(sf::Time time)
 {
     float t = time.asSeconds();
     if (stamina > 1) {
-        if (abs(getRotation() - 270.f) > 10.f) {
-            rotate(-t * strength * 90);
+        if (abs(getRotation() - (dir < 0 ? 270.f : 90.f)) > 10.f) {
+            rotate(-t * 60);
         }
         stamina -= stamina * t;
-        //std::cout << stamina << "\n";
         return strength * t;
     }
     return 0.0f;
+}
+
+void Fish::setFree()
+{
+    setRotation(0);
+}
+
+int Fish::respawn()
+{
+    swimmingDepth = startingY + (rand() % (int)(spawnRangesY[type].y - spawnRangesY[type].x) + spawnRangesY[type].x); // randomize
+
+    float width = rand() % 256 + 64;
+    float startingX = rand() % (int)(mapBounds.width - 64 - width) + 32;
+    cycleRangeX = { startingX, startingX + width }; // randomize
+
+    setPosition(cycleRangeX.x, swimmingDepth);
+
+    return price;
 }
