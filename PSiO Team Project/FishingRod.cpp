@@ -14,6 +14,7 @@ FishingRod::FishingRod(ResourceManager* resources, SoundManager* sm, sf::Vector2
 
 	// SM
 	SM = sm;
+
 }
 
 FishingRod::~FishingRod()
@@ -24,7 +25,6 @@ FishingRod::~FishingRod()
 void FishingRod::fixedUpdate(sf::Time time)
 {
 	float t = time.asSeconds();
-	std::cout << baitGoingUp << std::endl;
 
 	if (verticalDir == 1 && baitInAction && baitMaxPosUP + baitMaxPosDOWN >= bait.getPosition().y) {
 		bait.move(0, speed * t);
@@ -41,15 +41,18 @@ void FishingRod::fixedUpdate(sf::Time time)
 		baitGoingUp = false;
 	}
 	if (bait.getPosition().y > baitMaxPosUP + 16 && !soundPlayed) {
-		SM->playSound("splash",1);
+		SM->playSound("splash", 1);
 		soundPlayed = true;
 		baitGoingUp = false;
 	}
+
 	if (baitGoingUp) {
-		SM->playSound("reel",2);
+		SM->setSound("reel", 2);
+		SM->unpauseSound(2);
 	}
-	
-	
+	else {
+		SM->pauseSound(2);
+	}
 	
 }
 

@@ -7,16 +7,16 @@ SoundManager::SoundManager(ResourceManager* r)
     // --- music
     music.openFromFile("./resources/music/background_music.ogg");
     music.setLoop(true);
-    music.setVolume(10);
+    music.setVolume(musicVol);
     music.play();
 
     backgroundSound.openFromFile("./resources/music/crickets_background_noises.wav");
     backgroundSound.setLoop(true);
+    backgroundSound.setVolume(bgVol);
     backgroundSound.play();
-    backgroundSound.setVolume(25);
 
-    effects.setVolume(5);
-
+    effects.setVolume(effectsVol);
+    effectsBg.setVolume(effectsBgVol);
 
 }
 
@@ -25,21 +25,58 @@ SoundManager::~SoundManager()
     
 }
 
-void SoundManager::playSound(std::string soundName, int canal)
+void SoundManager::playSound(std::string soundName, int channel)
 {
-    if (canal == 1) {
+    switch(channel) {
+    case 1:
         effects.setBuffer(*resources->getSound(soundName));
         effects.play();
-        effects.setVolume(5);
+        break;
+    case 2:
+        effectsBg.setBuffer(*resources->getSound(soundName));
+        effectsBg.play();
+        effectsBg.setLoop(true);
+        break;
     }
+}
 
-    if (canal == 2) {
-        effects2.setBuffer(*resources->getSound(soundName));
-        effects2.play();
-        //effects2.setLoop(true);
-        effects2.setVolume(10);
+void SoundManager::setSound(std::string soundName, int channel)
+{
+    switch (channel) {
+    case 1:
+        effects.setBuffer(*resources->getSound(soundName));
+        break;
+    case 2:
+        if (effectsBg.getBuffer() == resources->getSound(soundName)) break;
+
+        effectsBg.setBuffer(*resources->getSound(soundName));
+        effectsBg.setLoop(true);
+        break;
     }
-    Playing = true;
+}
+
+void SoundManager::pauseSound(int channel)
+{
+    switch (channel) {
+    case 1:
+        effects.pause();
+        break;
+    case 2:
+        effectsBg.pause();
+        break;
+    }
+}
+
+void SoundManager::unpauseSound(int channel)
+{
+    switch (channel) {
+    case 1:
+        effects.play();
+        break;
+    case 2:
+        if (effectsBg.getStatus() != sf::SoundSource::Status::Playing) effectsBg.play();
+        break;
+    }
 }
 
 void SoundManager::setMuted(bool muted)
@@ -47,17 +84,15 @@ void SoundManager::setMuted(bool muted)
     if (muted) {
         music.setVolume(0);
         backgroundSound.setVolume(0);
+
         effects.setVolume(0);
-        effects2.setVolume(0);
+        effectsBg.setVolume(0);
     }
     else {
-        music.setVolume(10);
-        backgroundSound.setVolume(25);
-        effects.setVolume(5);
-    }
-}
+        music.setVolume(musicVol);
+        backgroundSound.setVolume(bgVol);
 
-bool SoundManager::isPlaying()
-{
-    return Playing;
+        effects.setVolume(effectsVol);
+        effectsBg.setVolume(effectsBgVol);
+    }
 }
