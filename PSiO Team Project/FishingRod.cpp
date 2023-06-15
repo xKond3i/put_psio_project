@@ -28,7 +28,11 @@ void FishingRod::fixedUpdate(sf::Time time)
 {
 	float t = time.asSeconds();
 
-	if (caught != nullptr) caught->followBait(time, bait.getPosition());
+	if (caught != nullptr) {
+		caught->followBait(time, bait.getPosition());
+		float fightForce = caught->fight(time);
+		bait.move(0, fightForce);
+	}
 
 	if (verticalDir == 1 && baitInAction && baitMaxPosUP + baitMaxPosDOWN >= bait.getPosition().y) {
 		bait.move(0, speed * t);

@@ -28,6 +28,8 @@ private:
 	float speed;		 // depending of fish type
 	float price;		 // depending of fish type
 
+	float stamina = 100;
+
 	// MOVING
 	int dir = 1;
 	bool zigZag = 0;
@@ -46,9 +48,10 @@ public:
 	static const int maxType = 6;
 	static inline const sf::Vector2f spawnRangesY[maxType] = { {0, 75}, {25, 90}, {150, 250}, {220, 400}, {600, 700}, {350, 500} };
 	static inline float fishSpeeds[maxType] = { 30.f, 80.f, 50.f, 40.f, 10.f, 60.f };
-	static inline float fishStrengths[maxType] = { 5.f, 10.f, 30.f, 20.f, 40.f, 50.f };
+	static inline float fishStrengths[maxType] = { 25.f, 50.f, 150.f, 100.f, 200.f, 250.f };
 	static inline float fishPrices[maxType] = { 9.f, 14.f, 21.f, 49.f, 250.f, 200.f };
 
 	void followBait(sf::Time time, sf::Vector2f target);
+	float fight(sf::Time time);
 
 };
