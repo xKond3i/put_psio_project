@@ -17,6 +17,7 @@
 #include "ResourceManager.h"
 #include "SoundManager.h"
 #include "SplashScreen.h"
+#include "UI/HUD.h"
 
 // GAME contructs
 #include "Camera.h"
@@ -65,6 +66,8 @@ private:
 	Camera* camera;
 
 	SplashScreen* splashScreen;
+
+	HUD* hud;
 
 	// --- COMPONENTS
 	Background* background;

@@ -13,6 +13,7 @@ class ResourceManager
 private:
 	std::map<std::string, std::shared_ptr<sf::Texture>> textures;
 	std::map<std::string, std::shared_ptr<sf::SoundBuffer>> sounds;
+	std::map<std::string, std::shared_ptr<sf::Font>> fonts;
 	// [TO DO] Add Font support
 
 public:
@@ -21,7 +22,9 @@ public:
 
 	bool loadTexture(std::string name, std::string path, bool repeated=false);
 	bool loadSound(std::string name, std::string path);
+	bool loadFont(std::string name, std::string path);
 
 	sf::Texture* getTexture(std::string name);
 	sf::SoundBuffer* getSound(std::string name);
+	sf::Font* getFont(std::string name);
 };

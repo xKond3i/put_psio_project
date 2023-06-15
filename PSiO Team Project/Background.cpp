@@ -154,7 +154,6 @@ void Background::draw(sf::RenderWindow& target)
         if (layers.count(name) <= 0) continue;
         target.draw(*layers[name]);
     }
-
     target.draw(moon);
 
     target.draw(*borderSymbolLeft);
