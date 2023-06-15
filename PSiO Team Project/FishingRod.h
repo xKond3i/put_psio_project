@@ -34,6 +34,7 @@ private:
 
 	bool baitInAction = false;
 	bool soundPlayed = false;
+	bool baitGoingUp = false;
 
 	// UPGARDES
 	int currentLineWidth = 0;

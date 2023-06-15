@@ -12,14 +12,19 @@ private:
 	sf::Music backgroundSound;
 
 	sf::Sound effects;
+	sf::Sound effects2;
 	ResourceManager *resources;
+
+	bool Playing = false;
 
 public:
 	SoundManager(ResourceManager* r);
 	~SoundManager();
 
-	void playSound(std::string soundName);
+	void playSound(std::string soundName, int canal);
 
 	void setMuted(bool muted);
+
+	bool isPlaying();
 
 };

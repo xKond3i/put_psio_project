@@ -24,22 +24,32 @@ FishingRod::~FishingRod()
 void FishingRod::fixedUpdate(sf::Time time)
 {
 	float t = time.asSeconds();
+	std::cout << baitGoingUp << std::endl;
 
 	if (verticalDir == 1 && baitInAction && baitMaxPosUP + baitMaxPosDOWN >= bait.getPosition().y) {
 		bait.move(0, speed * t);
 	}
+	
 	if ((verticalDir == -1 && baitMaxPosUP < bait.getPosition().y)
-		|| (!baitInAction && baitMaxPosUP < bait.getPosition().y && verticalDir != -1)) {
+		|| (!baitInAction && baitMaxPosUP < bait.getPosition().y && verticalDir != -1)) {		
+		baitGoingUp = true;
 		bait.move(0, -speed * t);
 	}
 	if (baitMaxPosUP == bait.getPosition().y) {
 		baitInAction = false;
 		soundPlayed = false;
+		baitGoingUp = false;
 	}
 	if (bait.getPosition().y > baitMaxPosUP + 16 && !soundPlayed) {
-		SM->playSound("splash");
+		SM->playSound("splash",1);
 		soundPlayed = true;
+		baitGoingUp = false;
 	}
+	if (!baitGoingUp) {
+		SM->playSound("reel",2);
+	}
+	
+	
 	
 }
 
