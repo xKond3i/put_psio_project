@@ -90,6 +90,7 @@ void FishingRod::handleEvents(sf::Event event)
 		case sf::Keyboard::W:
 		case sf::Keyboard::Up:
 			verticalDir = 0;
+			baitGoingUp = false;
 			break;
 		case sf::Keyboard::S:
 		case sf::Keyboard::Down:

@@ -12,16 +12,23 @@ private:
 	sf::Music backgroundSound;
 
 	sf::Sound effects;
-	sf::Sound effects2;
+	sf::Sound effectsBg;
 	ResourceManager *resources;
 
 	bool Playing = false;
+
+	// initial volume
+	static const unsigned int musicVol = 5;
+	static const unsigned int bgVol = 10;
+
+	static const unsigned int effectsVol = 15;
+	static const unsigned int effectsBgVol = 15;
 
 public:
 	SoundManager(ResourceManager* r);
 	~SoundManager();
 
-	void playSound(std::string soundName, int canal);
+	void playSound(std::string soundName, int channel);
 
 	void setMuted(bool muted);
 
