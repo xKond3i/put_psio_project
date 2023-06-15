@@ -2,7 +2,6 @@
 
 HUD::HUD(ResourceManager* resources, sf::RenderWindow& window)
 {
-	
 	text.setFont(*resources->getFont("pixel_font"));
 	text.setFillColor(sf::Color(0, 188, 76));
 	text.setOrigin(0, text.getLocalBounds().left/2);
@@ -34,6 +33,8 @@ HUD::~HUD()
 
 void HUD::draw(sf::RenderTarget& target)
 {
+	text.setString(std::to_string(money) + "$");
+
 	target.draw(text); 
 	target.draw(moneySprite);
 	target.draw(lengthUpgrade);
@@ -60,4 +61,14 @@ void HUD::handleEvents(sf::Event event, sf::RenderTarget& window)
 	}
 
 
+}
+
+int HUD::getMoney()
+{
+	return money;
+}
+
+void HUD::modifyMoney(int value)
+{
+	money += value;
 }

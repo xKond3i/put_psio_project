@@ -28,26 +28,53 @@ void FishingRod::fixedUpdate(sf::Time time)
 {
 	float t = time.asSeconds();
 
+	// FISH FIGHTING
 	if (caught != nullptr) {
 		caught->followBait(time, bait.getPosition());
 		float fightForce = caught->fight(time);
-		bait.move(0, fightForce);
+		if (fightForce > 0) {
+			verticalDir == 1;
+			bait.move(0, fightForce);
+		}
+
+		stress = (bait.getPosition().y - fightY) / maxFightDistance;
+		stress = stress > 1 ? 1 : stress < 0 ? 0 : stress;
+
+		if (stress == 1) {
+			// breakLine();
+			caught->setFree();
+			caught = nullptr;
+			lineBroke = true;
+			baitInAction = false;
+			verticalDir = -1;
+		}
 	}
 
-	if (verticalDir == 1 && baitInAction && baitMaxPosUP + baitMaxPosDOWN >= bait.getPosition().y) {
+	// MOVEMENT
+	if (verticalDir == 1 && baitInAction && baitMaxPosUP + baitMaxPosDOWN >= bait.getPosition().y && !lineBroke) {
 		bait.move(0, speed * t);
 	}
 	
 	if ((verticalDir == -1 && baitMaxPosUP < bait.getPosition().y)
-		|| (!baitInAction && baitMaxPosUP < bait.getPosition().y && verticalDir != -1)) {		
+		|| (!baitInAction && baitMaxPosUP < bait.getPosition().y && verticalDir != -1) || lineBroke) {		
 		baitGoingUp = true;
 		bait.move(0, -speed * t);
 	}
 
-	if (baitMaxPosUP == bait.getPosition().y) {
+	if (baitMaxPosUP >= bait.getPosition().y) {
 		baitInAction = false;
 		soundPlayed = false;
 		baitGoingUp = false;
+
+		lineBroke = false;
+		stress = 0;
+
+		if (caught != nullptr) {
+			// fishing succeded
+			int money = caught->respawn();
+			caught = nullptr;
+			collectedMoney = money;
+		}
 	}
 
 	if (bait.getPosition().y > baitMaxPosUP + waterOffset && !soundPlayed) {
@@ -115,7 +142,7 @@ void FishingRod::handleEvents(sf::Event event)
 
 void FishingRod::scanFishes(std::vector<Fish*>& fishes)
 {
-	if (caught != nullptr) return;
+	if (caught != nullptr || lineBroke) return;
 
 	for (const auto f : fishes) {
 		sf::Vector2f fPos = f->getPosition();
@@ -126,6 +153,7 @@ void FishingRod::scanFishes(std::vector<Fish*>& fishes)
 		if (d > fishAttentionRadius) continue;
 
 		caught = f;
+		fightY = bait.getPosition().y;
 	}
 }
 
@@ -162,4 +190,13 @@ void FishingRod::setInAction(bool baitInAction_)
 bool FishingRod::getInAction()
 {
 	return baitInAction;
+}
+
+int FishingRod::getCollectedMoney()
+{
+	if (collectedMoney == 0) return 0;
+
+	int money = collectedMoney;
+	collectedMoney = 0;
+	return money;
 }
