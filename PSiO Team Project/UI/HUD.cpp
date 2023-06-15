@@ -12,10 +12,7 @@ HUD::HUD(ResourceManager* resources, sf::RenderWindow& window)
 	//moneysprite
 	moneySprite.setTexture(*resources->getTexture("money"));
 	moneySprite.setOrigin({ moneySprite.getLocalBounds().width / 2, moneySprite.getLocalBounds().height / 2 });
-	moneySprite.setPosition(200, 200);
-
-	std::cout << moneySprite.getTexture()->getSize().x << std::endl;
-
+	moneySprite.setPosition(window.mapPixelToCoords({ 0, 0 }));
 }
 
 HUD::~HUD()

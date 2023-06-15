@@ -298,6 +298,8 @@ void Game::load()
     
 
     // SPLASH SCREEN
+    window->setView(*camera->getView(Camera::UI));
+
     splashScreen = new SplashScreen(resources, soundManager, *window);
     hud = new HUD(resources, *window);
 
