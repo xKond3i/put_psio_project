@@ -27,6 +27,7 @@ private:
 	sf::Vector2f fishingRodPosition;
 
 	float baitMaxPosUP;
+	float baitMaxPosDOWN;
 
 	int verticalDir = 0;
 	float speed = 50;
@@ -35,6 +36,18 @@ private:
 	bool soundPlayed = false;
 	bool baitGoingUp = false;
 
+	// UPGARDES
+	int currentLineWidth = 0;
+	int currentSpeed = 0;
+	int currentAttractiveness = 0;
+
+	static const int maxUpgrades = 3;
+
+	int upgradesLW[maxUpgrades] = { 200, 450, 768 };
+	int upgradesS[maxUpgrades] = { 50, 75, 110 };
+	float upgradesA[maxUpgrades] = { .4f, .6f, .9f };
+
+	// IMPORTANT
 	SoundManager *SM;
 
 public:

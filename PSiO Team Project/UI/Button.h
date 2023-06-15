@@ -24,8 +24,8 @@ private:
 	float initialScale = .5f;
 
 	// animation
-	sf::Time animTime = sf::Time::Zero;
 	sf::Time animTimeEnd = sf::seconds(.25);
+	sf::Time animTime = animTimeEnd;
 
 public:
 	Button(ResourceManager* resources, std::string texName,     sf::Vector2f pos, bool originCenter = true, bool disabled_ = false);
