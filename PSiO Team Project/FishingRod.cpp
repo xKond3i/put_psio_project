@@ -45,7 +45,7 @@ void FishingRod::fixedUpdate(sf::Time time)
 		soundPlayed = true;
 		baitGoingUp = false;
 	}
-	if (!baitGoingUp) {
+	if (baitGoingUp) {
 		SM->playSound("reel",2);
 	}
 	
