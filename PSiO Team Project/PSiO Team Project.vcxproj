@@ -160,6 +160,7 @@
   <ItemGroup>
     <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="UI\HUD.cpp" />
     <ClCompile Include="UI\Button.cpp" />
     <ClCompile Include="Fish.cpp" />
     <ClCompile Include="FishingRod.cpp" />
@@ -209,6 +210,7 @@
   <ItemGroup>
     <ClInclude Include="AnimatedSprite.h" />
     <ClInclude Include="Background.h" />
+    <ClInclude Include="UI\HUD.h" />
     <ClInclude Include="UI\Button.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Fish.h" />

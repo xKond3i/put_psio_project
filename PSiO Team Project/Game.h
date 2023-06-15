@@ -54,6 +54,7 @@ private:
 	sf::Color fillColor = sf::Color(19, 31, 65);
 
 
+
 	// --- GAME constructs
 	sf::RenderWindow* window;
 	sf::Event event;

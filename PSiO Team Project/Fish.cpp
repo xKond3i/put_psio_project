@@ -25,6 +25,7 @@ Fish::Fish(ResourceManager* resources, int type, float startingY, sf::IntRect ma
     swimmingDepth = startingY + (rand() % (int)(spawnRangesY[type].y - spawnRangesY[type].x) + spawnRangesY[type].x); // randomize
     strength = fishStrengths[type];
     speed = fishSpeeds[type];
+    price = fishPrices[type];
 
     float width = rand() % 256 + 64;
     float startingX = rand() % (int)(mapBounds.width - 64 - width) + 32;

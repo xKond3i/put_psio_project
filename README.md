@@ -26,9 +26,10 @@ Tadeusz Bugalski ([@Tadeq-hash](https://github.com/Tadeq-hash)), who agreed to b
 Tadeusz Bugalski ([@Tadeq-hash](https://github.com/Tadeq-hash)), który zezwolił na przedstawienie jako główny bohater. ❤
 
 **Free to use resources used in the project:**
-- [**@CRAFTPIX.NET** — FREE FISHING GAME ASSETS PIXEL ART PACK](https://craftpix.net/freebies/free-fishing-game-assets-pixel-art-pack/)
-- [**@CRAFTPIX.NET** — FREE CITY BACKGROUNDS PIXEL ART](https://craftpix.net/freebies/free-city-backgrounds-pixel-art/)
-- [**ITCH.IO** — FREE RPG ASSET TILESET MARKETPLACE PACK](https://gif-superretroworld.itch.io/marketplace) by [@GIF](https://twitter.com/gif_not_jif)
-- [**ITCH.IO** — **@SHUBIBUBI**'s COZY FISHING ASSET PACK](https://shubibubi.itch.io/cozy-fishing)
-- [**@FONTAWESOME.COM**](https://fontawesome.com/) provided Us with icons (We made them pixelated)!
-- [**@MIXKIT.CO**](https://mixkit.co/free-sound-effects/) provided Us with music ans sound!
+- [**CRAFTPIX.NET** — FREE FISHING GAME ASSETS PIXEL ART PACK](https://craftpix.net/freebies/free-fishing-game-assets-pixel-art-pack/)
+- [**CRAFTPIX.NET** — FREE CITY BACKGROUNDS PIXEL ART](https://craftpix.net/freebies/free-city-backgrounds-pixel-art/)
+- [**ITCH.IO** — FREE RPG ASSET TILESET MARKETPLACE PACK](https://gif-superretroworld.itch.io/marketplace) by [**@GIF**](https://twitter.com/gif_not_jif)
+- [**ITCH.IO** — COZY FISHING ASSET PACK](https://shubibubi.itch.io/cozy-fishing) by [**@SHUBIBUBI**](https://shubibubi.itch.io/)
+- [**DAFONT.COM** — UPHEAVAL](https://www.dafont.com/upheaval.font)
+- [**FONTAWESOME.COM**](https://fontawesome.com/) provided Us with icons (We made them pixelated)!
+- [**MIXKIT.CO**](https://mixkit.co/free-sound-effects/) provided Us with music ans sound!
