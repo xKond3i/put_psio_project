@@ -199,9 +199,9 @@ void Game::handleEvents()
 
         player->handleEvents(event);
 
-        splashScreen->handleEvents(event, *window, paused);
-
         window->setView(*camera->getView(Camera::UI));
+
+        splashScreen->handleEvents(event, *window, paused);
         hud->handleEvents(event, *window);
         
         if (splashScreen->getWantToUnpause()) pause();

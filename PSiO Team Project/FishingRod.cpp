@@ -3,7 +3,7 @@
 
 FishingRod::FishingRod(ResourceManager* resources, SoundManager* sm, sf::Vector2f tadziuPos)
 {
-	bait.setTexture(*resources->getTexture("bait" + std::to_string(currentFishAttentionRadius + 1)));
+	bait.setTexture(*resources->getTexture("bait" + std::to_string(3))); // currentFishAttentionRadius + 1
 	bait.setOrigin(bait.getLocalBounds().width / 2, 0);
 	tadziuPos.y -= 28;
 	bait.setPosition(tadziuPos);

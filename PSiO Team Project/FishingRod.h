@@ -46,16 +46,16 @@ private:
 	// CATCHING MECHANICS
 	float stress = 0; // 0.f - 1.f
 	float fightY = 0;
-	float maxFightDistance = 25;
+	float maxFightDistance = 50; // 25
 	bool lineBroke = false;
 	Fish* caught = nullptr;
 
 	int collectedMoney = 0;
 
 	// UPGARDES
-	int currentLineLength;
-	int currentSpeed;
-	int currentFishAttentionRadius;
+	int currentLineLength = FishingRod::maxUpgrades - 1;
+	int currentSpeed = 0;
+	int currentFishAttentionRadius = 0;
 
 	// IMPORTANT
 	SoundManager *SM;

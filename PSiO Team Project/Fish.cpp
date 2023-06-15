@@ -122,6 +122,7 @@ int Fish::respawn()
     cycleRangeX = { startingX, startingX + width }; // randomize
 
     setPosition(cycleRangeX.x, swimmingDepth);
+    setRotation(0);
 
     return price;
 }

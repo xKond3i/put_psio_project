@@ -27,6 +27,8 @@ public:
 	void draw(sf::RenderTarget& target);
 	void handleEvents(sf::Event event, sf::RenderTarget& window);
 
+	void resize(sf::RenderWindow& window);
+
 	int getMoney();
 	void modifyMoney(int value);
 
