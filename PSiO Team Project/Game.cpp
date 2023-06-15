@@ -108,8 +108,8 @@ void Game::fixedUpdate(sf::Time time)
     player->checkFrameCollision(boundsWithOffset);
 
     
-    if (player->FR->getInAction()) {
-        sf::Vector2f pos = player->FR->getBaitPos();    
+    if (player->getFR()->getInAction()) {
+        sf::Vector2f pos = player->getFR()->getBaitPos();    
         camera->moveTo(pos);
     }
     else {
@@ -173,6 +173,9 @@ void Game::handleEvents()
         player->handleEvents(event);
 
         splashScreen->handleEvents(event, *window, paused);
+        
+        if (splashScreen->getWantToUnpause()) pause();
+        if (splashScreen->getWantToExit()) window->close();
     }
 }
 
@@ -187,6 +190,9 @@ void Game::pause()
 
     splashScreen->restart();
     splashScreen->setFading(!paused);
+
+    // RESTART FISHING ROD
+    player->getFR()->setInAction(0);
 }
 
 
@@ -232,7 +238,7 @@ void Game::load()
     /* ---------- SOUNDS ---------- */
     try {
         // background
-        resources->loadSound("baitSplash", "./resources/sounds/bait_splash.wav");
+        resources->loadSound("splash", "./resources/sounds/bait_splash.wav");
         // ...
     }
     catch (std::exception e) {
@@ -244,5 +250,5 @@ void Game::load()
     player = new Player(resources,soundManager);
 
     // SPLASH SCREEN
-    splashScreen = new SplashScreen(resources, *window);
+    splashScreen = new SplashScreen(resources, soundManager, *window);
 }

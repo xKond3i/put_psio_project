@@ -36,10 +36,16 @@ public:
 
 	void draw(sf::RenderTarget& target);
 
-	void animate(sf::Time time);
+	void animate(sf::Time time, sf::Color color = sf::Color::White);
 
+	// hover
 	void setHovered(bool hovered_);
+	bool getHovered();
 
 	void setScale(float factor);
+
+	// toggle
+	void toggle();
+	int getState();
 
 };

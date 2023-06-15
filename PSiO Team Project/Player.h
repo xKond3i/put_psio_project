@@ -33,9 +33,11 @@ private:
 	bool holdingLeft = false;
 	bool holdingRight = false;
 
-public:
 	SoundManager* SM;
 	FishingRod* FR;
+
+public:
+
 	Player(ResourceManager* resources, SoundManager* sm);
 	~Player();
 
@@ -49,7 +51,8 @@ public:
 
 	void draw(sf::RenderTarget& target);
 
-	
 
+
+	FishingRod* getFR();
 
 };

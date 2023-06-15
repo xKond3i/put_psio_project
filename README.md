@@ -30,3 +30,4 @@ Tadeusz Bugalski ([@Tadeq-hash](https://github.com/Tadeq-hash)), który zezwoli�
 - [**@CRAFTPIX.NET** — FREE CITY BACKGROUNDS PIXEL ART](https://craftpix.net/freebies/free-city-backgrounds-pixel-art/)
 - [**@SHUBIBUBI**'s COZY FISHING ASSET PACK](https://shubibubi.itch.io/cozy-fishing)
 - [**@FONTAWESOME.COM**](https://fontawesome.com/) provided Us with icons (We made them pixelated)!
+- [**@MIXKIT.CO**](https://mixkit.co/free-sound-effects/) provided Us with music ans sound!

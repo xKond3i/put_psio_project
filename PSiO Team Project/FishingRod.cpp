@@ -19,28 +19,22 @@ FishingRod::~FishingRod()
 void FishingRod::fixedUpdate(sf::Time time)
 {
 	float t = time.asSeconds();
-	std::cout << verticalDir << std::endl;
+
 	if (verticalDir == 1 && baitInAction) {
-		bait.move(0, 1);
+		bait.move(0, speed * t);
 	}
-	if (verticalDir == -1 && baitMaxPosUP < bait.getPosition().y) {
-		bait.move(0, -1);
-	}
-	if (!baitInAction && baitMaxPosUP < bait.getPosition().y && verticalDir != -1) {
-		bait.move(0, -1);
+	if ((verticalDir == -1 && baitMaxPosUP < bait.getPosition().y)
+		|| (!baitInAction && baitMaxPosUP < bait.getPosition().y && verticalDir != -1)) {
+		bait.move(0, -speed * t);
 	}
 	if (baitMaxPosUP == bait.getPosition().y) {
 		baitInAction = false;
 		soundPlayed = false;
 	}
-	if (bait.getPosition().y > baitMaxPosUP + 32 && !soundPlayed) {
-		SM->playSound("baitSplash");
+	if (bait.getPosition().y > baitMaxPosUP + 16 && !soundPlayed) {
+		SM->playSound("splash");
 		soundPlayed = true;
 	}
-
-	
-	
-
 	
 }
 
@@ -71,8 +65,8 @@ void FishingRod::handleEvents(sf::Event event)
 			break;
 		case sf::Keyboard::S:
 		case sf::Keyboard::Down:
+			if (!baitInAction) verticalDir = 1; // 1 means DOWN
 			baitInAction = true;
-			verticalDir = 1; // 1 means DOWN
 			break;
 		}
 	}
@@ -80,6 +74,10 @@ void FishingRod::handleEvents(sf::Event event)
 		switch (event.key.code) {
 		case sf::Keyboard::W:
 		case sf::Keyboard::Up:
+			verticalDir = 0;
+			break;
+		case sf::Keyboard::S:
+		case sf::Keyboard::Down:
 			verticalDir = 0;
 			break;
 		}

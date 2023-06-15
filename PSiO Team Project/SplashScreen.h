@@ -8,11 +8,14 @@
 // RESOURCES
 #include "ResourceManager.h"
 
+// SOUNDS
+#include "SoundManager.h"
+
 // COMPONENTS
 #include "UI/Button.h"
 
 // OTHER
-#include <vector>
+#include <map>
 
 class SplashScreen
 {
@@ -29,11 +32,17 @@ private:
 	float centerY;
 	float spacing = 16;
 
-	std::vector<Button*> buttons;
+	std::map<std::string, Button*> buttons;
 	float buttonsSpacing = 64;
 
+	// button actions to forward
+	bool wantToUnpause = false;
+	bool wantToExit = false;
+
+	SoundManager* SM;
+
 public:
-	SplashScreen(ResourceManager* resources, sf::RenderWindow& window);
+	SplashScreen(ResourceManager* resources, SoundManager* sm, sf::RenderWindow& window);
 	~SplashScreen();
 
 	void draw(sf::RenderTarget& target);
@@ -47,5 +56,9 @@ public:
 	void resize(sf::VideoMode windowSize);
 
 	bool entryFinished();
+
+	// button actions to forward
+	bool getWantToUnpause();
+	bool getWantToExit();
 
 };

@@ -41,22 +41,19 @@ void Player::checkFrameCollision(sf::IntRect frame)
 
 void Player::handleEvents(sf::Event event)
 {
-
     FR->handleEvents(event);
-    std::cout << dir << std::endl;
+
     // KeyPressed
     if (event.type == sf::Event::KeyPressed) {
         switch (event.key.code) {
         case sf::Keyboard::A:
         case sf::Keyboard::Left:
             dir = -1;
-            FR->setInAction(0);
             holdingLeft = true;
             break;
         case sf::Keyboard::D:
         case sf::Keyboard::Right:
             dir = 1;
-            FR->setInAction(0);
             holdingRight = true;
             break;
         }
@@ -83,8 +80,6 @@ void Player::handleEvents(sf::Event event)
 
 void Player::update(sf::Time time)
 {
-
-    
 
 }
 
@@ -113,6 +108,9 @@ void Player::fixedUpdate(sf::Time time)
     // move
     if (dir == 0) move({ speed * slideDir * t, 0 });
     else move({ speed * dir * t, 0 });
+
+    // BLOCK FROM FISHING WHILE MOVING
+    FR->setInAction(0);
 }
 
 void Player::draw(sf::RenderTarget& target)
@@ -121,6 +119,7 @@ void Player::draw(sf::RenderTarget& target)
     FR->draw(target);
 }
 
-
-
-
+FishingRod* Player::getFR()
+{
+    return FR;
+}

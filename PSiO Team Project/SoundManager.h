@@ -20,4 +20,6 @@ public:
 
 	void playSound(std::string soundName);
 
+	void setMuted(bool muted);
+
 };

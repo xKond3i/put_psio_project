@@ -22,30 +22,38 @@ class FishingRod
 
 private:
 	float gForce = 9.81f;
+
 	sf::Sprite bait;
-	float baitMaxPosUP;
 	sf::Vector2f fishingRodPosition;
+
+	float baitMaxPosUP;
+
 	int verticalDir = 0;
+	float speed = 50;
+
 	bool baitInAction = false;
 	bool soundPlayed = false;
-	SoundManager *SM;
-public:
 
+	SoundManager *SM;
+
+public:
 
 	FishingRod(ResourceManager*, SoundManager* sm, sf::Vector2f tadziuPos);
 	~FishingRod();
 
 	/* ---------- METHODS ---------- */
-	void checkFrameCollision(sf::IntRect frame);
+	void draw(sf::RenderTarget& target);
+
 	void update(sf::Time time);		 // logic EXCEPT physics take place here!
 	void fixedUpdate(sf::Time time); // physics take place here.
-	void setLineOrigin(sf::Vector2f baitOrigin, sf::Vector2f tadziuScale);
+
 	void handleEvents(sf::Event event);
+
 	sf::Vector2f getBaitPos();
 
-	void draw(sf::RenderTarget& target);
+	void setLineOrigin(sf::Vector2f baitOrigin, sf::Vector2f tadziuScale);
+
 	void setInAction(bool baitInAction_);
 	bool getInAction();
 
 };
-
