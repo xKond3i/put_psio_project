@@ -48,6 +48,7 @@ void SoundManager::setMuted(bool muted)
         music.setVolume(0);
         backgroundSound.setVolume(0);
         effects.setVolume(0);
+        effects2.setVolume(0);
     }
     else {
         music.setVolume(10);
