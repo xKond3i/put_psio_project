@@ -33,3 +33,8 @@ Tadeusz Bugalski ([@Tadeq-hash](https://github.com/Tadeq-hash)), który zezwoli�
 - [**DAFONT.COM** — UPHEAVAL](https://www.dafont.com/upheaval.font)
 - [**FONTAWESOME.COM**](https://fontawesome.com/) provided Us with icons (We made them pixelated)!
 - [**MIXKIT.CO**](https://mixkit.co/free-sound-effects/) provided Us with music ans sound!
+
+———
+
+Powered by **SFML 2.5.1**\
+[![SFML logo](https://www.sfml-dev.org/images/logo.png)](https://www.sfml-dev.org)
