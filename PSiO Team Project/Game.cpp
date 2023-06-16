@@ -107,7 +107,7 @@ void Game::fixedUpdate(sf::Time time)
     camera->fixedUpdate(time);
     camera->fixToBounds(mapBounds);
 
-    splashScreen->play(time);
+    splashScreen->play(time, *window);
 
 
 
@@ -190,12 +190,12 @@ void Game::handleEvents()
         }
 
         // Window Resized
+        camera->handleEvents(event);
+
         if (event.type == sf::Event::Resized)
         {
             windowSize = { event.size.width, event.size.height };
         }
-
-        camera->handleEvents(event);
 
         player->handleEvents(event);
 
@@ -276,7 +276,7 @@ void Game::load()
         
         //FONT
         resources->loadFont("pixel_font", "resources/fonts/pixel_font.ttf");
-
+        resources->loadFont("poppins", "resources/fonts/poppins.ttf");
        
     }
     catch (std::exception e) {

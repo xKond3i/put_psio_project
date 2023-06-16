@@ -8,8 +8,9 @@ SplashScreen::SplashScreen(ResourceManager* resources, SoundManager* sm, sf::Ren
     dimm.setSize({ (float)window.getSize().x, (float)window.getSize().y });
     dimm.setPosition({ 0, 0 });
 
-    sf::Vector2f center = { (float)window.getSize().x / 2, (float)window.getSize().y / 2 };
-    centerY = center.y;
+    sf::Vector2f center = window.mapPixelToCoords({ (int)window.getSize().x / 2, (int)window.getSize().y / 2 });
+    //sf::Vector2f center = { (float)window.getSize().x / 2, (float)window.getSize().y / 2 };
+    centerY = window.getSize().y / 2;
     windowHeight = window.getSize().y;
     logo.setPosition(center);
 
@@ -48,7 +49,7 @@ void SplashScreen::draw(sf::RenderTarget& target)
 
 }
 
-void SplashScreen::play(sf::Time time)
+void SplashScreen::play(sf::Time time, sf::RenderTarget& window)
 {
     float progress = splashTime / splashTimeEnd;
 
@@ -85,7 +86,9 @@ void SplashScreen::play(sf::Time time)
     if (!splashFirstTime) {
         float goal = borderSpacing / 2 + logo.getGlobalBounds().height / 2;
         float diff = abs(goal - centerY);
-        logo.setPosition(logo.getPosition().x, centerY - diff * progress);
+        sf::Vector2f pos = window.mapPixelToCoords({ (int)window.getSize().x / 2, (int)(centerY) });
+        pos.y -= diff * progress;
+        logo.setPosition(pos);
     }
 
     // BUTTONS
@@ -95,7 +98,10 @@ void SplashScreen::play(sf::Time time)
         float goal = windowHeight - borderSpacing / 2 - btn->getGlobalBounds().height / 2;
         float diff = abs(goal - centerY);
         btn->setColor({ 255, 255, 255, alpha });
-        btn->setPosition(btn->getPosition().x, centerY + diff * progress);
+        sf::Vector2f pos = window.mapPixelToCoords({ 0, (int)(centerY) });
+        pos.x = btn->getPosition().x;
+        pos.y += diff * progress;
+        btn->setPosition(pos);
     }
 }
 
@@ -119,7 +125,7 @@ void SplashScreen::handleEvents(sf::Event event, sf::RenderTarget& window, bool 
 {
     if (event.type == sf::Event::Resized)
     {
-        resize({ event.size.width, event.size.height });
+        resize(window, { event.size.width, event.size.height });
     }
 
     if (!paused) return;
@@ -171,10 +177,11 @@ void SplashScreen::handleEvents(sf::Event event, sf::RenderTarget& window, bool 
 
 
 
-void SplashScreen::resize(sf::VideoMode windowSize)
+void SplashScreen::resize(sf::RenderTarget& window, sf::VideoMode windowSize)
 {
-    sf::Vector2f center = { (float)windowSize.width / 2, (float)windowSize.height / 2 };
-    centerY = center.y;
+    sf::Vector2f center = window.mapPixelToCoords({ (int)windowSize.width / 2, (int)windowSize.height / 2 });
+    //sf::Vector2f center = { (float)window.getSize().x / 2, (float)window.getSize().y / 2 };
+    centerY = windowSize.height / 2;
     windowHeight = (float)windowSize.height;
 
     dimm.setSize({ (float)windowSize.width, (float)windowSize.height });

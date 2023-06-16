@@ -50,8 +50,6 @@ bool ResourceManager::loadFont(std::string name, std::string path)
 {
     std::transform(name.begin(), name.end(), name.begin(), ::toupper);
 
-
-
     std::shared_ptr<sf::Font> font = std::make_shared<sf::Font>();
     if (!font->loadFromFile(path)) {
         throw std::runtime_error("[!] failed to load font... [" + path + "]");
@@ -61,7 +59,7 @@ bool ResourceManager::loadFont(std::string name, std::string path)
         throw std::runtime_error("[!] overriding font... [" + name + "]");
         return false;
     }
-    //font.setSmooth(false);
+    //font->setSmooth(false);
     fonts[name] = font;
     return true;
 }

@@ -49,11 +49,11 @@ public:
 
 	void handleEvents(sf::Event event, sf::RenderTarget& window, bool paused);
 
-	void play(sf::Time time);
+	void play(sf::Time time, sf::RenderTarget& window);
 	void restart();
 	void setFading(bool fading);
 
-	void resize(sf::VideoMode windowSize);
+	void resize(sf::RenderTarget& window, sf::VideoMode windowSize);
 
 	bool entryFinished();
 

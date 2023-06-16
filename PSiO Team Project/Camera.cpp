@@ -9,6 +9,7 @@ void Camera::setupViews()
 	views[Camera::UI]   -> zoom(1.f / scale);
 
 	views[Camera::GAME] -> setCenter((windowSize.width / 2 / scale), (windowSize.height / 2 / scale) + 170);
+	views[Camera::UI] -> setCenter((windowSize.width / 2 / scale), (windowSize.height / 2 / scale) + 170);
 
 	// -> start at TOP
 	sf::Vector2f dest = { 0, 0 };
@@ -25,6 +26,7 @@ Camera::Camera(sf::VideoMode windowSize_)
 
 Camera::~Camera()
 {
+	for (auto p : views) delete p.second;
 	views.clear();
 }
 
