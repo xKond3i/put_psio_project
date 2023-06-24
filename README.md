@@ -9,7 +9,7 @@ Team Project with [@‌IgnacyChrobak](https://github.com/saladtopfive)
 
 <img src="resources/promo.png" width=256>
 
-**"Tadziu's Fishing Adventure"** \
+**"Tadziu's Fishing Adventure"** [version 0.3.1]\
 Tadziu - bydgoski znajomy twórców - wyrusza na wędkarską wyprawę, by zyskać chwałę. 🎣 \
 Tadziu - Our friend from Bydgoszcz - takes on a fishing adventure to get fameous. 🎣 \
 *Inspired by ["Cat goes fishing"](https://store.steampowered.com/app/343780/Cat_Goes_Fishing/) and ["Fishing.io"](https://www.crazygames.com/game/fishing-io)*
