@@ -7,7 +7,7 @@ Team Project with [@‌IgnacyChrobak](https://github.com/saladtopfive)
 <img src="https://avatars.githubusercontent.com/u/127973555?v=4" style="margin: 1rem 0; display: inline-block; border-radius: 100vmin; width: 4rem;">
 -->
 
-<img src="resources/promo.png" width=256>
+<img src="resources/promo.gif" width=256>
 
 **"Tadziu's Fishing Adventure"** [version 0.3.1]\
 Tadziu - bydgoski znajomy twórców - wyrusza na wędkarską wyprawę, by zyskać chwałę. 🎣 \
