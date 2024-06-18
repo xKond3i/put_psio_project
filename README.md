@@ -1,29 +1,21 @@
+# TADZIU'S FISHING ADVENTURE 🎣
 **Poznan University of Technology 🎓** \
 *Structural and Object-Oriented Programming* \
-Team Project with [@‌IgnacyChrobak](https://github.com/saladtopfive)
-
-<!--
-<img src="https://xkond3i.github.io/xKond3i/resources/logo_theme-bg.png" style="margin: 1rem 0; display: inline-block; border-radius: 100vmin; width: 4rem;">
-<img src="https://avatars.githubusercontent.com/u/127973555?v=4" style="margin: 1rem 0; display: inline-block; border-radius: 100vmin; width: 4rem;">
--->
+Team Project with **Ignacy Chrobak** ([@‌saladtopfive](https://github.com/saladtopfive))
 
 <img src="resources/promo.gif" width=256>
 
+## About
 **"Tadziu's Fishing Adventure"** [version 0.3.1]\
-Tadziu - bydgoski znajomy twórców - wyrusza na wędkarską wyprawę, by zyskać chwałę. 🎣 \
-Tadziu - Our friend from Bydgoszcz - takes on a fishing adventure to get fameous. 🎣 \
-*Inspired by ["Cat goes fishing"](https://store.steampowered.com/app/343780/Cat_Goes_Fishing/) and ["Fishing.io"](https://www.crazygames.com/game/fishing-io)*
-
-———
+Tadziu - our friend from Bydgoszcz - takes on a fishing adventure to earn some fame. 🎣 \
 
 🎣 [Trello Board](https://trello.com/b/PKK7mM5n/psio-team-project) \
 🎣 [Figma Concept/Mood Board](https://www.figma.com/file/woyPS8ISQzgJqNXyHCYecT/Tadziu's-Fishing-Adventures?type=design&node-id=0%3A1&t=YevXVrn1Su3Uy0Kf-1)
 
-———
 
+## Acknowledgments
 **Thanks to:** \
-Tadeusz Bugalski ([@Tadeq-hash](https://github.com/Tadeq-hash)), who agreed to be depicted as main hero. ❤ \
-Tadeusz Bugalski ([@Tadeq-hash](https://github.com/Tadeq-hash)), który zezwolił na przedstawienie jako główny bohater. ❤
+Tadeusz Bugalski ([@Tadeq-hash](https://github.com/Tadeq-hash)), who agreed to be depicted as a main hero. ❤
 
 **Free to use resources used in the project:**
 - [**CRAFTPIX.NET** — FREE FISHING GAME ASSETS PIXEL ART PACK](https://craftpix.net/freebies/free-fishing-game-assets-pixel-art-pack/)
@@ -31,10 +23,9 @@ Tadeusz Bugalski ([@Tadeq-hash](https://github.com/Tadeq-hash)), który zezwoli�
 - [**ITCH.IO** — FREE RPG ASSET TILESET MARKETPLACE PACK](https://gif-superretroworld.itch.io/marketplace) by [**@GIF**](https://twitter.com/gif_not_jif)
 - [**ITCH.IO** — COZY FISHING ASSET PACK](https://shubibubi.itch.io/cozy-fishing) by [**@SHUBIBUBI**](https://shubibubi.itch.io/)
 - [**DAFONT.COM** — UPHEAVAL](https://www.dafont.com/upheaval.font)
-- [**FONTAWESOME.COM**](https://fontawesome.com/) provided Us with icons (We made them pixelated)!
-- [**MIXKIT.CO**](https://mixkit.co/free-sound-effects/) provided Us with music ans sound!
+- [**FONTAWESOME.COM**](https://fontawesome.com/) provided us with icons (we made them pixelated)!
+- [**MIXKIT.CO**](https://mixkit.co/free-sound-effects/) provided us with music ans sound!
 
-———
-
-Powered by **SFML 2.5.1**\
-[![SFML logo](https://www.sfml-dev.org/images/logo.png)](https://www.sfml-dev.org)
+Powered by **SFML 2.5.1** \
+[![SFML logo](resources/sfml_logo.png)](https://www.sfml-dev.org)
+<!--[![SFML logo](https://www.sfml-dev.org/images/logo.png)](https://www.sfml-dev.org)-->
