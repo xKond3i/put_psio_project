@@ -12,6 +12,10 @@ Tadziu - our friend from Bydgoszcz - takes on a fishing adventure to earn some f
 🎣 [Trello Board](https://trello.com/b/PKK7mM5n/psio-team-project) \
 🎣 [Figma Concept/Mood Board](https://www.figma.com/file/woyPS8ISQzgJqNXyHCYecT/Tadziu's-Fishing-Adventures?type=design&node-id=0%3A1&t=YevXVrn1Su3Uy0Kf-1)
 
+> [!CAUTION]
+> Work on the project has been suspended. \
+> State: incomplete and core features missing.
+
 
 ## Acknowledgments
 **Thanks to:** \
